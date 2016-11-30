@@ -59,5 +59,13 @@ int main(int argc, char** argv )
     imshow("Display Image", rec);
     waitKey(0);
 
+    Mat Dx;
+    Sobel(image, Dx, CV_64F, 1, 0, 3);
+
+    Mat Dy;
+    Sobel(image, Dy, CV_64F, 0, 1, 3);
+
+    imshow("Display Image", Dx);
+    waitKey(0);
     return 0;
 }
