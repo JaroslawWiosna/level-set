@@ -69,28 +69,30 @@ int main(int argc, char** argv )
     contours.push_back(contours2);
   */
 
-    int esc = 200;//contours1.size();
-    int pos_x = 0, pos_y = 0;
+    int esc = 100;//contours1.size();
     while(esc)
     {
         for(int i = 0; i < contours1.size(); i++)
         {
-            pos_x = contours1[i].x;
-            pos_y = contours1[i].y;
-            if (image.at<uchar>(contours1[i].x,contours1[i].y) == 255)
+            if ((image.at<uchar>(contours1[i].y,contours1[i].x) >= 200) && (image.at<uchar>(contours1[i].y,contours1[i].x) <= 255))
             {
                 if (contours1[i].x <= 150)
-                    pos_x +=1;//contours1[i].x += 1;
+                    contours1[i].x += 1;
                 if (contours1[i].x > 150)
-                    pos_x -=1;//contours1[i].x -= 1;
+                    contours1[i].x -= 1;
                 if (contours1[i].y <= 150)
-                    pos_y +=1;//contours1[i].y += 1;
+                    contours1[i].y += 1;
                 if (contours1[i].y > 150)
-                    pos_y -=1;//contours1[i].y -= 1;
-                contours1[i] = Point{pos_x,pos_y};
+                    contours1[i].y -= 1;
             }
         }
         esc--;
+        contours.erase(contours.end());
+        contours.push_back(contours1);
+        Mat3b rec(image.rows, image.cols, Vec3b(0,0,0));
+        drawContours(rec, contours, -1, Scalar(0,255,0), 1);
+        imshow("Display Image", rec);
+        waitKey(0);
     }
     contours.push_back(contours1);
     printf("size: %d\r\n",contours1.size());
