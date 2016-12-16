@@ -79,11 +79,12 @@ int main(int argc, char** argv )
         {
             //phi[i][j] = 100 - sqrt( (rows/2-i)*(rows/2-i) + (cols/2-j)*(cols/2-j) ); //Middle point of a circle depends on image size 
 	    //phi[i][j] = Heaviside(phi[i][j]);
-            
+            /*
             if (100 - sqrt( (rows/2-i)*(rows/2-i) + (cols/2-j)*(cols/2-j) ) >= 0)
                 phi[i][j] = 1;
             else
-                phi[i][j] = -1;
+                phi[i][j] = -1;*/
+            phi[i][j] = sin(3.1415*i/5)*sin(3.1415*j/5);
 	}
 
 
@@ -95,7 +96,7 @@ int main(int argc, char** argv )
             for (std::size_t j = 1; j < cols-1; ++j)
             {
 	        float mi = 0.00001;
-		float eta = 0.0001;
+		float eta = 0.0000001;
 		float ni = 0.0001;
 		float lambda1 = 0.0001;
 		float lambda2 = 0.0001;
@@ -114,7 +115,7 @@ int main(int argc, char** argv )
             for (std::size_t i = 0; i < rows; ++i)
                 for (std::size_t j = 0; j < cols; ++j)
                 {
-                    if(std::abs(phi[i][j]) < 1)
+                    if(std::abs(phi[i][j]) < 0.1)
                         rec[i][j] = cv::Vec3b(0,255,0);
                 }
                 cv::imshow("Display Image", rec);
