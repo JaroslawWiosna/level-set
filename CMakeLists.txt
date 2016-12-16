@@ -15,7 +15,7 @@ enable_testing()
 find_package(Gtest)
 
 if(BUILD_TESTS)
-  add_subdirectory(tst)
+  add_subdirectory(gtest)
 endif()
 
 
