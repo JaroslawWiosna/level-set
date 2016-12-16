@@ -22,6 +22,8 @@ int main(int argc, char** argv )
 
     int rows = image.rows;
     int cols = image.cols;
+    
+    //printf("\r\n%d\t%d\r\n",rows,cols);
 
     float** fimage = new float*[rows];
     for(int i = 0; i < rows; ++i)
@@ -30,7 +32,7 @@ int main(int argc, char** argv )
     for (std::size_t i = 0; i < rows; ++i)
         for (std::size_t j = 0; j < cols; ++j)
         {
-            fimage[i][j] = image[i][j];
+            fimage[i][j] = image.at<uchar>(i,j);
 	}
 
 
@@ -41,7 +43,7 @@ int main(int argc, char** argv )
     for (std::size_t i = 0; i < rows; ++i)
         for (std::size_t j = 0; j < cols; ++j)
         {
-            phi[i][j] = 50 - sqrt( (200-i)*(200-i) + (150-j)*(150-j) );
+            phi[i][j] = 50 - sqrt( (rows/2-i)*(rows/2-i) + (cols/2-j)*(cols/2-j) ); //Middle point of a circle depends on image size 
 	    //phi[i][j] = Heaviside(phi[i][j]);
 	}
 
@@ -58,10 +60,13 @@ int main(int argc, char** argv )
 		float eps = 0.0001;
 		float c1 = 0.0001;
 		float c2 = 0.0001;
-	        float A = mi / (sqrt( pow(eta,2) + pow((phi[i+1][j] - phi[i][j]),2)  + pow((phi[i][j+1] - phi[i][j-1])/2.0,2) ));
+	        //float A = mi / (sqrt( pow(eta,2) + pow((phi[i+1][j] - phi[i][j]),2)  + pow((phi[i][j+1] - phi[i][j-1])/2.0,2) ));
 	        float B = mi / (sqrt( pow(eta,2) + pow((phi[i+1][j] - phi[i-1][j]/2.0),2)  + pow((phi[i][j] - phi[i+1][j])/2.0,2) ));
 		// TODO: change A to lambda expr
-	        phi[i][j] = (phi[i][j] + (eps/ (3.1415 * (pow(eps,2) + pow(phi[i][j],2)))) * A* phi[i+1][j] + A*phi[i-1][j] + B*phi[i][j+1] + B*phi[i][j-1] - ni - lambda1*(pow(fimage[i][j] - c1),2)   - lambda2*(pow(fimage[i][j] - c2),2) ) / ( 1 + (eps/ (3.1415 * (pow(eps,2) + pow(phi[i][j],2)))) * (A + A + B + B)  ) ;
+                
+                auto A = [](int i, int j, float ** phi, float & mi, float & eta)->float { return mi / (sqrt( pow(eta,2) + pow((phi[i+1][j] - phi[i][j]),2)  + pow((phi[i][j+1] - phi[i][j-1])/2.0,2) ));};
+                
+	        phi[i][j] = (phi[i][j] + (eps/ (3.1415 * (pow(eps,2) + pow(phi[i][j],2)))) * A(i,j,phi,mi,eta)* phi[i+1][j] + A(i,j,phi,mi,eta)*phi[i-1][j] + B*phi[i][j+1] + B*phi[i][j-1] - ni - lambda1*pow(fimage[i][j] - c1,2)   - lambda2*pow(fimage[i][j] - c2,2) ) / ( 1 + (eps/ (3.1415 * (pow(eps,2) + pow(phi[i][j],2)))) * (A(i,j,phi,mi,eta) + A(i,j,phi,mi,eta) + B + B)  ) ;
 	    }
 
     
