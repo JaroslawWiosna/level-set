@@ -1,15 +1,14 @@
-[![Build Status](https://travis-ci.org/JaroslawWiosna/level-set.svg?branch=master)](https://travis-ci.com/JaroslawWiosna/level-set)
-
+[![Build Status](https://travis-ci.com/JaroslawWiosna/level-set.svg?token=o1NhkEzXPpzaim9ynHJS&branch=master)](https://travis-ci.com/JaroslawWiosna/level-set)
 # level-set
 > Team project - Cyfrowe techniki rozpoznawania obrazów (pl. "Digital image recognition methods") 2016/2017
 
-  - [Overview](#Overview)
-  - [Installation](#Installation)
-  - [Usage](#Usage)
-  - [Timeline](#Timeline)
-  - [Credits](#Credits)
-  - [Contributors](#Contributors)
-  - [Licence](#Licence)
+  - [Overview](#overview)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Timeline](#timeline)
+  - [Credits](#credits)
+  - [Contributors](#contributors)
+  - [Licence](#licence)
 
 ## Overview
 
@@ -34,7 +33,7 @@ TBD
 
 ## Contributors
 
-Many thanks to [contributors](https://github.com/JaroslawWiosna/level-set/graphs/contributors)
+[contributors](https://github.com/JaroslawWiosna/level-set/graphs/contributors)
 
 ## Licence
 
