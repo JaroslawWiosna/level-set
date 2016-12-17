@@ -2,8 +2,6 @@
 #include <opencv2/opencv.hpp>
 #include <math.h>
 
-//using namespace cv;
-
 float Heaviside(float data)
 {
 	return ((data >= 0) ? 1 : 0);
@@ -105,18 +103,39 @@ int main(int argc, char** argv )
 		float eps = 0.0001;
 		float dt = 1; // timestep
 		
-	        //float A = mi / (sqrt( pow(eta,2) + pow((phi[i+1][j] - phi[i][j]),2)  + pow((phi[i][j+1] - phi[i][j-1])/2.0,2) ));
-	        //float B = mi / (sqrt( pow(eta,2) + pow((phi[i+1][j] - phi[i-1][j]/2.0),2)  + pow((phi[i][j] - phi[i+1][j])/2.0,2) ));
-		// TODO: change A to lambda expr
-                
-                auto A = [](int i, int j, float ** phi, float & mi, float & eta)->float { return mi / (sqrt( pow(eta,2) + pow((phi[i+1][j] - phi[i][j]),2)  + pow((phi[i][j+1] - phi[i][j-1])/2.0,2) ));};
-                auto B = [](int i, int j, float ** phi, float & mi, float & eta)->float { return mi / (sqrt( pow(eta,2) + pow((phi[i+1][j] - phi[i-1][j]/2.0),2)  + pow((phi[i][j] - phi[i+1][j])/2.0,2) ));};
+                auto A = 
+                    [](int i, int j, float ** phi, float & mi, float & eta)
+		    -> float { 
+                        return mi / (sqrt( pow(eta,2) 
+			    + pow((phi[i+1][j] - phi[i][j]),2) 
+			    + pow((phi[i][j+1] - phi[i][j-1])/2.0,2) ));
+		    };
+                auto B = 
+                    [](int i, int j, float ** phi, float & mi, float & eta)
+		    -> float { 
+                        return mi / (sqrt( pow(eta,2) 
+                            + pow((phi[i+1][j] - phi[i-1][j]/2.0),2) 
+			    + pow((phi[i][j] - phi[i+1][j])/2.0,2) ));
+		    };
                 
 		auto old_value = phi[i][j];
 
-	        phi[i][j] = (phi[i][j] + dt*(eps/ (3.1415 * (pow(eps,2) + pow(phi[i][j],2)))) * A(i,j,phi,mi,eta)* phi[i+1][j] + A(i-1,j,phi,mi,eta)*phi[i-1][j] + B(i,j,phi,mi,eta)*phi[i][j+1] + B(i,j-1,phi,mi,eta)*phi[i][j-1] - ni - lambda1*pow(fimage[i][j] - c1,2)   - lambda2*pow(fimage[i][j] - c2,2) )
-		       	/ 
-			( 1 + dt*(eps/ (3.1415 * (pow(eps,2) + pow(phi[i][j],2)))) * (A(i,j,phi,mi,eta) + A(i-1,j,phi,mi,eta) + B(i,j,phi,mi,eta) + B(i,j-1,phi,mi,eta))  ) ;
+	        phi[i][j] = 
+                    ( phi[i][j] 
+		        + dt * (eps/(3.1415 * (pow(eps,2) + pow(phi[i][j],2))))
+		        * A(i,j,phi,mi,eta) *  phi[i+1][j] 
+			+ A(i-1,j,phi,mi,eta) * phi[i-1][j] 
+			+ B(i,j,phi,mi,eta) * phi[i][j+1] 
+			+ B(i,j-1,phi,mi,eta) * phi[i][j-1] 
+			- ni 
+			- lambda1 * pow(fimage[i][j] - c1,2) 
+			- lambda2*pow(fimage[i][j] - c2,2) )
+                    / 
+                    ( 1 + dt 
+		        * (eps / (3.1415 * ( pow(eps,2) + pow( phi[i][j],2) ))) 
+		        * (A(i,j,phi,mi,eta) + A(i-1,j,phi,mi,eta) 
+                        + B(i,j,phi,mi,eta) + B(i,j-1,phi,mi,eta))  ) ;
+
                 if ( phi[i][j] - old_value > 0.001 ) 
                 {
 		        should_continue = true;
@@ -137,21 +156,13 @@ int main(int argc, char** argv )
                 cv::waitKey(0);
     }
 
-    
-
-
-//    cv::Mat matphi = static_cast<cv::Point>(phi);
     cv::Mat3b rec(image.rows, image.cols, cv::Vec3b(0,0,0));
-    //rec[200][100] = cv::Vec3b(0,255,0);
     for (std::size_t i = 0; i < rows; ++i)
         for (std::size_t j = 0; j < cols; ++j)
         {
 	    if(std::abs(phi[i][j]) < 1)
                 rec[i][j] = cv::Vec3b(0,255,0);
 	}
-
-
-    
 
     if ( !image.data )
     {
