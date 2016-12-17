@@ -7,37 +7,24 @@ float Heaviside(float data)
 	return ((data >= 0) ? 1 : 0);
 }
 
-float Average_c1(float ** phi, float ** fimage, int rows, int cols)
+std::pair<float, float> Average_c(float ** phi, float ** fimage, int rows, int cols)
 {
-    float sum = 0;  //Sum of pixel values
-    int pixnum = 0; //number of pixels inside circle
+    float sum_inside{}; // inside or on border
+    float sum_outside{};
+    int pixnum{}; //number of pixels inside circle
     for (std::size_t i = 1; i < rows-1; ++i)
         for (std::size_t j = 1; j < cols-1; ++j)
         {
             if (Heaviside(phi[i][j]))   //if phi > 0 ==> pixel inside circle
             {
-                sum += fimage[i][j];
-                pixnum++;
+                sum_inside += fimage[i][j];
             }
-        }
-        
-    return sum/pixnum;
-}
-
-float Average_c2(float ** phi, float ** fimage, int rows, int cols)
-{
-    float sum = 0;  //Sum of pixel values
-    int pixnum = 0; //number of pixels outside circle
-    for (std::size_t i = 1; i < rows-1; ++i)
-        for (std::size_t j = 1; j < cols-1; ++j)
-        {
-            if (!Heaviside(phi[i][j]))  //if phi < 0 ==> pixel inside circle
+            else // if (Heaviside(phi[i][j]))   //if phi < 0 ==> pixel outside circle
             {
-                sum += fimage[i][j];
-                pixnum++;
+                sum_outside += fimage[i][j];
             }
+		pixnum++;
         }
-        
-    return sum/pixnum;
+    return std::make_pair(sum_inside/pixnum, sum_outside/pixnum);
 }
 

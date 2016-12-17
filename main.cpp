@@ -51,8 +51,9 @@ int main(int argc, char** argv )
     for (std::size_t step = 0; step < 500 && should_continue; ++step)
     {
 	should_continue = false;
-        float c1 = Average_c1(phi, fimage, rows, cols);
-        float c2 = Average_c2(phi, fimage, rows, cols);;
+        auto c = Average_c(phi, fimage, rows, cols);
+	auto c1 = c.first;
+	auto c2 = c.second;
         for (std::size_t i = 1; i < rows-1; ++i)
             for (std::size_t j = 1; j < cols-1; ++j)
             {
