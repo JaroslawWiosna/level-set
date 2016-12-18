@@ -18,13 +18,13 @@ std::pair<float, float> Average_c(float ** phi, float ** fimage, int rows, int c
             if (Heaviside(phi[i][j]))   //if phi > 0 ==> pixel inside circle
             {
                 sum_inside += fimage[i][j];
+                pixnum++;
             }
             else // if (Heaviside(phi[i][j]))   //if phi < 0 ==> pixel outside circle
             {
                 sum_outside += fimage[i][j];
             }
-		pixnum++;
         }
-    return std::make_pair(sum_inside/pixnum, sum_outside/pixnum);
+    return std::make_pair(sum_inside/pixnum, sum_outside/(rows*cols-pixnum));
 }
 
