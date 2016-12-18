@@ -9,6 +9,7 @@
 | `005.jpg` | `400x300` | G | `003.jpg` smudged                                       |
 | `006.jpg` | `400x300` | G | modern art                                              |
 | `007.jpg` | `400x300` | G | modern art with noise                                   |
+| `010.jpg` | `400x300` | B | many dots                                               |
 
 B = binary
 G = grayscale
