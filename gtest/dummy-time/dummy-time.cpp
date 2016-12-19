@@ -9,11 +9,6 @@ TEST(MatrixTest, dummytime1)
 //  ASSERT_TRUE(static_cast<int>(end - begin) < 10000);
 }
 
-TEST(MatrixTest, dummytime2)
-{
-  ASSERT_FALSE(5 > 2);
-}
-
 int main(int argc, char* argv[])
 {
   ::testing::InitGoogleTest(&argc, argv);
