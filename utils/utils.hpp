@@ -1,6 +1,6 @@
-#include <stdio.h>
+#include <cstdio>
 #include <opencv2/opencv.hpp>
-#include <math.h>
+#include <cmath>
 
 float Heaviside(float data)
 {
