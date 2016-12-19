@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "../../utils/utils.hpp"
 
-TEST(MatrixTest, average1)
+TEST(Test, average1)
 {
   constexpr int rows{40};  
   constexpr int cols{40};  
@@ -40,7 +40,7 @@ TEST(MatrixTest, average1)
   ASSERT_FLOAT_EQ(c2, 40.0);
 }
 
-TEST(MatrixTest, average2)
+TEST(Test, average2)
 {
   constexpr int rows{400};  
   constexpr int cols{400};  
@@ -79,7 +79,7 @@ TEST(MatrixTest, average2)
   ASSERT_FLOAT_EQ(c2, 0.0);
 }
 
-TEST(MatrixTest, average3)
+TEST(Test, average3)
 {
   constexpr int rows{80};  
   constexpr int cols{80};  

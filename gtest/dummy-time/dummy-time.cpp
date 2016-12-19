@@ -1,7 +1,7 @@
 #include <chrono>
 #include <gtest/gtest.h>
 
-TEST(MatrixTest, dummytime1)
+TEST(Test, dummytime1)
 {
   auto begin = std::chrono::steady_clock::now();
     auto something = 1;

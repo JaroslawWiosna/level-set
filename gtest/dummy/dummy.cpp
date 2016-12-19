@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-TEST(MatrixTest, dummy1)
+TEST(Test, dummy1)
 {
   ASSERT_TRUE(true);
 }
