@@ -44,7 +44,7 @@ int main(int argc, char** argv )
             else
                 phi[i][j] = -1;
 		*/
-            phi[i][j] = 0.02 * sin(3.1415*i/50)*sin(3.1415*j/50);
+            phi[i][j] = 0.02 * sin( M_PI *i/50)*sin( M_PI *j/50);
 	}
 
     bool should_continue = true;
@@ -84,7 +84,7 @@ int main(int argc, char** argv )
 
 	        phi[i][j] = 
                     ( phi[i][j] 
-		        + dt * (eps/(3.1415 * (pow(eps,2) + pow(phi[i][j],2))))
+		        + dt * (eps/( M_PI * (pow(eps,2) + pow(phi[i][j],2))))
 		        * A(i,j,phi,mi,eta) *  phi[i+1][j] 
 			+ A(i-1,j,phi,mi,eta) * phi[i-1][j] 
 			+ B(i,j,phi,mi,eta) * phi[i][j+1] 
@@ -94,7 +94,7 @@ int main(int argc, char** argv )
 			- lambda2*pow(fimage[i][j] - c2,2) )
                     / 
                     ( 1 + dt 
-		        * (eps / (3.1415 * ( pow(eps,2) + pow( phi[i][j],2) ))) 
+		        * (eps / ( M_PI * ( pow(eps,2) + pow( phi[i][j],2) ))) 
 		        * (A(i,j,phi,mi,eta) + A(i-1,j,phi,mi,eta) 
                         + B(i,j,phi,mi,eta) + B(i,j-1,phi,mi,eta))  ) ;
 

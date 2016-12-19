@@ -23,7 +23,7 @@ TEST(Test, average1)
   for (std::size_t i = 0; i < rows; ++i)
     for (std::size_t j = 0; j < cols; ++j)
     {
-      phi[i][j] = 0.02 * sin(3.1415*i/50)*sin(3.1415*j/50);
+      phi[i][j] = 0.02 * sin( M_PI *i/50)*sin( M_PI *j/50);
     }
 
   auto c = Average_c(phi, fimage, rows, cols);
@@ -62,7 +62,7 @@ TEST(Test, average2)
   for (std::size_t i = 0; i < rows; ++i)
     for (std::size_t j = 0; j < cols; ++j)
     {
-      phi[i][j] = 0.02 * sin(3.1415*i/50)*sin(3.1415*j/50);
+      phi[i][j] = 0.02 * sin( M_PI *i/50)*sin( M_PI *j/50);
     }
 
   auto c = Average_c(phi, fimage, rows, cols);
@@ -101,7 +101,7 @@ TEST(Test, average3)
   for (std::size_t i = 0; i < rows; ++i)
     for (std::size_t j = 0; j < cols; ++j)
     {
-      phi[i][j] = 0.02 * sin(3.1415*i/50)*sin(3.1415*j/50);
+      phi[i][j] = 0.02 * sin( M_PI *i/50)*sin( M_PI *j/50);
     }
 
   auto c = Average_c(phi, fimage, rows, cols);
