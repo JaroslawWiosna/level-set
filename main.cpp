@@ -22,11 +22,7 @@ int main(int argc, char** argv )
     for(int i = 0; i < rows; ++i)
         fimage[i] = new float[cols];
 
-    for (std::size_t i = 0; i < rows; ++i)
-        for (std::size_t j = 0; j < cols; ++j)
-        {
-            fimage[i][j] = image.at<uchar>(i,j);
-	}
+    copyMatIntoFimage(image, fimage);
 
     float** phi = new float*[rows];
     for(int i = 0; i < rows; ++i)

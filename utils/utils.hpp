@@ -64,3 +64,14 @@ void displayPhi(float** phi, int rows, int cols) {
         cv::imshow("Display Image", rec);
         cv::waitKey(0);
 }
+
+void copyMatIntoFimage(cv::Mat image, float** fimage){
+   int rows = image.rows;
+   int cols = image.cols;
+   for (std::size_t i = 0; i < rows; ++i)
+       for (std::size_t j = 0; j < cols; ++j)
+       {
+           fimage[i][j] = image.at<uchar>(i,j);
+       }
+}
+
