@@ -28,7 +28,7 @@ before_script:
 script: 
     - mkdir build
     - cd build
-    - cmake -DBUILD_TESTS=ON .. 
+    - cmake -DBUILD_TESTS=OFF .. 
     - make
     - make test
 
