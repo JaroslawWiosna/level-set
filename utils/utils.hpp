@@ -44,6 +44,23 @@ void initializePhi(float** phi, int rows, int cols, int type=1) {
 		*/
             //phi[i][j] = 0.02 * sin( M_PI *i/50)*sin( M_PI *j/50);
         }
+}
 
+void displayPhi(float** phi, int rows, int cols) {
+    cv::Mat3b rec(rows, cols, cv::Vec3b(0,0,0));
+    for (std::size_t i = 0; i < rows; ++i)
+        for (std::size_t j = 0; j < cols; ++j)
+        {
+            if(std::abs(phi[i][j]) < 100)
+                rec[i][j] = cv::Vec3b(0,105,0);
+            if(std::abs(phi[i][j]) < 10)
+                rec[i][j] = cv::Vec3b(0,155,0);
+            if(std::abs(phi[i][j]) < 1)
+                rec[i][j] = cv::Vec3b(0,205,0);
+            if(std::abs(phi[i][j]) < 0.1)
+                rec[i][j] = cv::Vec3b(0,255,0);
+        }
 
+        cv::imshow("Display Image", rec);
+        cv::waitKey(0);
 }

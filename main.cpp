@@ -90,21 +90,7 @@ int main(int argc, char** argv )
 		        should_continue = true;
 	        }
 	    }
-	    cv::Mat3b rec(image.rows, image.cols, cv::Vec3b(0,0,0));
-            for (std::size_t i = 0; i < rows; ++i)
-                for (std::size_t j = 0; j < cols; ++j)
-                {
-                    if(std::abs(phi[i][j]) < 100)
-                        rec[i][j] = cv::Vec3b(0,105,0);
-                    if(std::abs(phi[i][j]) < 10)
-                        rec[i][j] = cv::Vec3b(0,155,0);
-                    if(std::abs(phi[i][j]) < 1)
-                        rec[i][j] = cv::Vec3b(0,205,0);
-                    if(std::abs(phi[i][j]) < 0.1)
-                        rec[i][j] = cv::Vec3b(0,255,0);
-                }
-                cv::imshow("Display Image", rec);
-                cv::waitKey(0);
+            displayPhi(phi, rows, cols);
     }
     for(int i = 0; i < rows; ++i)
     {
