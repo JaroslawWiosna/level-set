@@ -28,29 +28,16 @@ int main(int argc, char** argv )
             fimage[i][j] = image.at<uchar>(i,j);
 	}
 
-
     float** phi = new float*[rows];
     for(int i = 0; i < rows; ++i)
         phi[i] = new float[cols];
 
-    for (std::size_t i = 0; i < rows; ++i)
-        for (std::size_t j = 0; j < cols; ++j)
-        {
-            //phi[i][j] = 100 - sqrt( (rows/2-i)*(rows/2-i) + (cols/2-j)*(cols/2-j) ); //Middle point of a circle depends on image size 
-	    //phi[i][j] = Heaviside(phi[i][j]);
-            /*
-            if (100 - sqrt( (rows/2-i)*(rows/2-i) + (cols/2-j)*(cols/2-j) ) >= 0)
-                phi[i][j] = 1;
-            else
-                phi[i][j] = -1;
-		*/
-            phi[i][j] = 0.02 * sin( M_PI *i/50)*sin( M_PI *j/50);
-	}
+    initializePhi(phi, rows, cols);
 
     bool should_continue = true;
     for (std::size_t step = 0; step < 500 && should_continue; ++step)
     {
-	should_continue = false;
+	//should_continue = false;
         auto c = Average_c(phi, fimage, rows, cols);
 	auto c1 = c.first;
 	auto c2 = c.second;
@@ -107,10 +94,6 @@ int main(int argc, char** argv )
             for (std::size_t i = 0; i < rows; ++i)
                 for (std::size_t j = 0; j < cols; ++j)
                 {
-//                    if(phi[i][j] < 0)
-//                        rec[i][j] = cv::Vec3b(0,0,155);
-//                    if(phi[i][j] > 0)
-//                        rec[i][j] = cv::Vec3b(155,0,0);
                     if(std::abs(phi[i][j]) < 100)
                         rec[i][j] = cv::Vec3b(0,105,0);
                     if(std::abs(phi[i][j]) < 10)
@@ -123,24 +106,17 @@ int main(int argc, char** argv )
                 cv::imshow("Display Image", rec);
                 cv::waitKey(0);
     }
+    for(int i = 0; i < rows; ++i)
+    {
+      delete [] phi[i];
+      delete [] fimage[i];
+    }
 
-    cv::Mat3b rec(image.rows, image.cols, cv::Vec3b(0,0,0));
-    for (std::size_t i = 0; i < rows; ++i)
-        for (std::size_t j = 0; j < cols; ++j)
-        {
-	    if(std::abs(phi[i][j]) < 1)
-                rec[i][j] = cv::Vec3b(0,255,0);
-	}
 
     if ( !image.data )
     {
         printf("No image data \n");
         return -1;
     }
-    namedWindow("Display Image", cv::WINDOW_AUTOSIZE );
-
-    cv::imshow("Display Image", rec);
-    cv::waitKey(0);
-
     return 0;
 }
