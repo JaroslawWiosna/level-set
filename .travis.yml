@@ -30,5 +30,5 @@ script:
     - cd build
     - cmake -DBUILD_TESTS=OFF .. 
     - make
-    - make test
+#    - make test
 
