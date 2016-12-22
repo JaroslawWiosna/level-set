@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 2.8)
 project( DisplayImage )
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 find_package( OpenCV REQUIRED )
-add_executable( level-set main.cpp )
+add_executable( level-set main.cpp Image/Image.cpp )
 target_link_libraries( level-set ${OpenCV_LIBS} )
 
 option(BUILD_TESTS "Build tests" OFF)

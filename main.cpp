@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <opencv2/opencv.hpp>
-#include "utils/utils.hpp"
 #include "Image/Image.hpp"
+#include "utils/utils.hpp"
 
 int main(int argc, char** argv )
 {
