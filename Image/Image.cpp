@@ -1,8 +1,3 @@
-//#include <stdio.h>
-//#include <cstdio>
-//#include <opencv2/opencv.hpp>
-//#include "../utils/utils.hpp"
-
 #include "Image.hpp"
 
 Image::Image(const std::string& filename, int flags=1)
@@ -71,7 +66,7 @@ void Image::detectBorders()
 	for (std::size_t step = 0; step < 2 && should_continue; ++step)
    		{
 		//should_continue = false;
-		auto c = Average_c(phi, fimage, rows, cols);
+		auto c = Average_c();
 		auto c1 = c.first;
 		auto c2 = c.second;
 		for (std::size_t i = 1; i < rows-1; ++i)
@@ -139,4 +134,33 @@ void Image::destroyPhi()
 		delete [] phi[i];
 	}
 }
+
+float Image::Heaviside(float data)
+{
+	return ((data >= 0) ? 1 : 0);
+}
+
+std::pair<float, float> Image::Average_c()
+{
+    float sum_inside{}; // inside or on border
+    float sum_outside{};
+    int pixnum_inside{}; //number of pixels inside circle
+    int pixnum_outside{}; //number of pixels outside circle
+    for (std::size_t i = 1; i < rows-1; ++i)
+        for (std::size_t j = 1; j < cols-1; ++j)
+        {
+            if (Heaviside(phi[i][j]))   //if phi > 0 ==> pixel inside circle
+            {
+                sum_inside += fimage[i][j];
+                pixnum_inside++;
+            }
+            else // if (Heaviside(phi[i][j]))   //if phi < 0 ==> pixel outside circle
+            {
+                sum_outside += fimage[i][j];
+                pixnum_outside++;
+            }
+        }
+    return std::make_pair(sum_inside/pixnum_inside, sum_outside/pixnum_outside);
+}
+
 
