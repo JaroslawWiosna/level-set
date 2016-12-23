@@ -81,14 +81,14 @@ void Image::detectBorders()
 				float dt = 0.001; // timestep
 	
                auto A = 
-                   [](int i, int j, float ** phi, float & mi, float & eta)
+                   [&](int i, int j, float ** phi, float & mi, float & eta)
 	    -> float { 
                        return mi / (sqrt( pow(eta,2) 
 		    + pow((phi[i+1][j] - phi[i][j]),2) 
 		    + pow((phi[i][j+1] - phi[i][j-1])/2.0,2) ));
 	    };
                auto B = 
-                   [](int i, int j, float ** phi, float & mi, float & eta)
+                   [&](int i, int j, float ** phi, float & mi, float & eta)
 	    -> float { 
                        return mi / (sqrt( pow(eta,2) 
                            + pow((phi[i+1][j] - phi[i-1][j]/2.0),2) 

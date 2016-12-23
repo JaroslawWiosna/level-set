@@ -23,6 +23,8 @@ private:
 
 public:
 	Image(const std::string& filename, int flags);
+	Image(Image const&) = delete;
+	Image(Image const&&) = delete;
 	~Image();
 	void displayPhi();
 	void detectBorders();
