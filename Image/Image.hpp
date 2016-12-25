@@ -1,3 +1,8 @@
+/**
+ * \class Image
+ *
+ */
+
 #ifndef IMAGE_HPP
 #define IMAGE_HPP
 
@@ -8,6 +13,9 @@ class Image {
 
 private:
 	cv::Mat inputImage;
+
+	
+	//fimage is a 2d array which is a copy of inputImage
 	float** fimage;
 	float** phi;
 	std::size_t rows;
@@ -30,7 +38,7 @@ private:
 	float Heaviside(float data);
 	void updateAverages();
 
-	FRIEND_TEST(Test,basic1); // FIXME: we
+	FRIEND_TEST(Test,basic1); // FIXME
 public:
 	Image(const std::string& filename, int flags);
 	Image(Image const&) = delete;
