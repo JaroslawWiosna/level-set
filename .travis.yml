@@ -5,6 +5,7 @@ language: cpp
 
 compiler:
     - gcc
+    - clang
 
 install:
     - if [ "$CXX" = "g++" ]; then export CXX="g++-6"; fi
@@ -28,7 +29,7 @@ before_script:
 script: 
     - mkdir build
     - cd build
-    - cmake -DBUILD_TESTS=OFF .. 
+    - cmake -DBUILD_TESTS=ON .. 
     - make
-#    - make test
+    - make test
 
