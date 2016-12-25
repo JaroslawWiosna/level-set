@@ -15,18 +15,23 @@ set(COMPILE_FLAGS "-Wall -Wno-missing-braces")
 set(GTEST_FLAGS "-lgtest")
 set(LINK_FLAGS "-lpthread")
 
-include_directories(${GTEST_INCLUDE_DIRS})
+if(BUILD_TESTS)
+	include_directories(${GTEST_INCLUDE_DIRS})
+endif()
 include_directories(${OpenCV_INCLUDE_DIRS})
+include_directories(Image)
 
 enable_testing()
-find_package(Gtest)
+if(BUILD_TESTS)
+	find_package(Gtest)
+endif()
 
 if(BUILD_TESTS)
 	set(LINK_FLAGS "${GTEST_FLAGS} ${LINK_FLAGS}")
 endif()
 
 if(BUILD_TESTS)
-  add_subdirectory(gtest)
+	add_subdirectory(gtest)
 endif()
 
 

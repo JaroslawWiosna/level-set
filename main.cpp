@@ -1,6 +1,6 @@
 #include <cstdio>
 #include <opencv2/opencv.hpp>
-#include "Image/Image.hpp"
+#include "Image.hpp"
 
 int main(int argc, char** argv )
 {

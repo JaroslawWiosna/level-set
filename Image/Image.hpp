@@ -1,25 +1,33 @@
 #ifndef IMAGE_HPP
 #define IMAGE_HPP
 
-#include <stdio.h>
 #include <cstdio>
 #include <opencv2/opencv.hpp>
 class Image {
 
 private:
-	cv::Mat image;
+	cv::Mat inputImage;
 	float** fimage;
 	float** phi;
 	std::size_t rows;
-
+	std::size_t cols;
+	float c1;//averageInside;
+	float c2;//averageOutside;
+	float mi;
+	float eta;
+	float ni;
+	float lambda1;
+	float lambda2;
+	float eps;
+	float dt;
+	
 	void initImage(const std::string& filename, int flags);
 	void initFimage(); 
 	void initPhi();
 	void destroyFimage();
 	void destroyPhi();
-	std::size_t cols;
 	float Heaviside(float data);
-	std::pair<float, float> Average_c();
+	void updateAverages();
 
 public:
 	Image(const std::string& filename, int flags);

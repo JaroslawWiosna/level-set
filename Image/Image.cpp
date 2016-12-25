@@ -1,37 +1,59 @@
 #include "Image.hpp"
+#include <cstdio>
+#include <opencv2/opencv.hpp>
 
 Image::Image(const std::string& filename, int flags=1)
 {
-	this->initImage(filename, flags);
-	this->rows = image.rows;
-	this->cols = image.cols;
-		this->initFimage();
-	this->initPhi();
+	initImage(filename, flags);
+	rows = inputImage.rows;
+	cols = inputImage.cols;
+
+	initFimage();
+	initPhi();
+	mi = 0.2;
+	eta = 0.00000001;
+	ni = 0;//0.00000001;
+	lambda1 = 0.300002;
+	lambda2 = 0.300002;
+	eps = 1000;
+	dt = 0.001; // timestep
+	
 }
+
 Image::~Image()
 {
-	this->destroyFimage();
-	this->destroyPhi();
+	destroyFimage();
+	destroyPhi();
 }
+
 void Image::initImage(const std::string& filename, int flags=1)
 {
-	this->image = cv::imread(filename, flags);
+	inputImage = cv::imread(filename, flags);
 }
+
 void Image::initFimage() 
 {
-	this->fimage = new float*[this->rows];
-	for(int i = 0; i < this->rows; ++i)
-      			this->fimage[i] = new float[this->cols];
+	fimage = new float*[rows];
+	for(int i = 0; i < rows; ++i)
+		fimage[i] = new float[cols];
+
+	for (std::size_t i = 0; i < rows; ++i)
+		for (std::size_t j = 0; j < cols; ++j)
+		{
+			fimage[i][j] = inputImage.at<uchar>(i,j);
+		}
 }
+
 void Image::initPhi()
 {
-	this->phi= new float*[this->rows];
-	for(int i = 0; i < this->rows; ++i)
-      			this->phi[i] = new float[this->cols];
-		for (std::size_t i = 0; i < this->rows; ++i)
-       		for (std::size_t j = 0; j < this->cols; ++j)
+	phi= new float*[rows];
+	for(int i = 0; i < rows; ++i)
+      		phi[i] = new float[cols];
+		
+	for (std::size_t i = 0; i < rows; ++i)
+       		for (std::size_t j = 0; j < cols; ++j)
        		{
-           			this->phi[i][j] = 100 - sqrt( (rows/2-i)*(rows/2-i) + (cols/2-j)*(cols/2-j) ); 
+        		phi[i][j] = 100 - sqrt( (rows/2-i)*(rows/2-i) + (cols/2-j)*(cols/2-j) ); 
 			//Middle point of a circle depends on image size 
     			//phi[i][j] = Heaviside(phi[i][j]);
            			/*
@@ -43,7 +65,9 @@ void Image::initPhi()
            			//phi[i][j] = 0.02 * sin( M_PI *i/50)*sin( M_PI *j/50);
        		}
 }
-void Image::displayPhi() {
+
+void Image::displayPhi() 
+{
 	cv::Mat3b rec(rows, cols, cv::Vec3b(0,0,0));
 	for (std::size_t i = 0; i < rows; ++i)
 		for (std::size_t j = 0; j < cols; ++j)
@@ -63,23 +87,21 @@ void Image::displayPhi() {
 void Image::detectBorders()
 {
 	bool should_continue = true;
-	for (std::size_t step = 0; step < 2 && should_continue; ++step)
+	for (std::size_t step = 0; step < 20 && should_continue; ++step)
    		{
 		//should_continue = false;
-		auto c = Average_c();
-		auto c1 = c.first;
-		auto c2 = c.second;
+		updateAverages();
+
+		//auto c = Average_c();
+		//auto c1 = c.first;
+		//auto c2 = c.second;
+
+		std::cout << "c1=" << c1 << " c2=" << c2 << std::endl;
+
 		for (std::size_t i = 1; i < rows-1; ++i)
 			for (std::size_t j = 1; j < cols-1; ++j)
 			{
-				float mi = 0.2;
-				float eta = 0.00000001;
-				float ni = 0;//0.00000001;
-				float lambda1 = 0.300002;
-				float lambda2 = 0.300002;
-				float eps = 1000;
-				float dt = 0.001; // timestep
-	
+
                auto A = 
                    [&](int i, int j, float ** phi, float & mi, float & eta)
 	    -> float { 
@@ -116,20 +138,20 @@ void Image::detectBorders()
 	        should_continue = true;
         }
     }
-//		this->displayPhi();
+		displayPhi();
    		}
 }
 
 void Image::destroyFimage()
 {
-	for(int i = 0; i < this->rows; ++i)
+	for(int i = 0; i < rows; ++i)
 	{
 		delete [] fimage[i];
 	}
 }
 void Image::destroyPhi()
 {
-	for(int i = 0; i < this->rows; ++i)
+	for(int i = 0; i < rows; ++i)
 	{
 		delete [] phi[i];
 	}
@@ -140,7 +162,7 @@ float Image::Heaviside(float data)
 	return ((data >= 0) ? 1 : 0);
 }
 
-std::pair<float, float> Image::Average_c()
+void Image::updateAverages()
 {
     float sum_inside{}; // inside or on border
     float sum_outside{};
@@ -149,18 +171,26 @@ std::pair<float, float> Image::Average_c()
     for (std::size_t i = 1; i < rows-1; ++i)
         for (std::size_t j = 1; j < cols-1; ++j)
         {
-            if (Heaviside(phi[i][j]))   //if phi > 0 ==> pixel inside circle
+            if (phi[i][j] >= 0)   //if phi > 0 ==> pixel inside circle
             {
                 sum_inside += fimage[i][j];
                 pixnum_inside++;
             }
-            else // if (Heaviside(phi[i][j]))   //if phi < 0 ==> pixel outside circle
+            else if (phi[i][j] < 0)   //if phi < 0 ==> pixel outside circle
             {
                 sum_outside += fimage[i][j];
                 pixnum_outside++;
             }
         }
-    return std::make_pair(sum_inside/pixnum_inside, sum_outside/pixnum_outside);
+
+    std::cout << "sum_inside=" << sum_inside << std::endl;
+    std::cout << "sum_outside=" << sum_outside << std::endl;
+
+    std::cout << "pix_inside=" << pixnum_inside << std::endl;
+    std::cout << "pix_outside=" << pixnum_outside << std::endl;
+
+    c1 = sum_inside  / static_cast<float>(pixnum_inside);
+    c2 = sum_outside / static_cast<float>(pixnum_outside);
 }
 
 
