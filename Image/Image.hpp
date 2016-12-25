@@ -46,6 +46,13 @@ public:
 	~Image();
 	void displayPhi();
 	void detectBorders();
+	void setMi(float value);
+	void setEta(float value);
+	void setNi(float value);
+	void setLambda1(float value);
+	void setLambda2(float value);
+	void setEps(float value);
+	void setDt(float value);
 
 };
 			

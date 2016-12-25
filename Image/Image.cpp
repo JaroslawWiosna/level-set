@@ -10,14 +10,15 @@ Image::Image(const std::string& filename, int flags=1)
 
 	initFimage();
 	initPhi();
+
+	//default values
 	mi = 0.2;
 	eta = 0.00000001;
-	ni = 0;//0.00000001;
+	ni = 0.00000001;
 	lambda1 = 0.300002;
 	lambda2 = 0.300002;
 	eps = 1000;
 	dt = 0.001; // timestep
-	
 }
 
 Image::~Image()
@@ -193,4 +194,38 @@ void Image::updateAverages()
     c2 = sum_outside / static_cast<float>(pixnum_outside);
 }
 
+void Image::setMi(float value)
+{
+	mi = value;
+}
+
+void Image::setEta(float value)
+{
+	eta = value;
+}
+
+void Image::setNi(float value)
+{
+	ni = value;
+}
+
+void Image::setLambda1(float value)
+{
+	lambda1 = value;
+}
+
+void Image::setLambda2(float value)
+{
+	lambda2 = value;
+}
+
+void Image::setEps(float value)
+{
+	eps = value;
+}
+
+void Image::setDt(float value)
+{
+	dt = value;
+}
 
