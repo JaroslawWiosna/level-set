@@ -5,10 +5,10 @@
 
 TEST(Test, basic1)
 {
-	const std::string& pathToTestImage = "../../test-images/001.jpg";
-	//Image image(pathToTestImage, cv::IMREAD_GRAYSCALE );
-	//Image image(pathToTestImage ,1);
+	const std::string& pathToTestImage = "../../../test-images/001.jpg";
+	Image image001(pathToTestImage, cv::IMREAD_GRAYSCALE );
 
+	ASSERT_EQ(image001.rows,300);
 	ASSERT_TRUE(true);
 }
 
