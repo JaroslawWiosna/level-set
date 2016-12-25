@@ -5,7 +5,12 @@ cmake_minimum_required(VERSION 2.8)
 project( DisplayImage )
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 find_package( OpenCV REQUIRED )
-add_executable( level-set main.cpp Image/Image.cpp )
+add_executable( 
+	level-set 
+	main.cpp 
+	Image/Image.cpp 
+	FlagParser/FlagParser.cpp
+	)
 target_link_libraries( level-set ${OpenCV_LIBS} )
 
 option(BUILD_TESTS "Build tests" OFF)
@@ -20,6 +25,7 @@ if(BUILD_TESTS)
 endif()
 include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories(Image)
+include_directories(FlagParser)
 
 enable_testing()
 if(BUILD_TESTS)
