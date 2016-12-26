@@ -24,7 +24,7 @@ target_link_libraries( level-set ${OpenCV_LIBS} )
 option(BUILD_TESTS "Build tests" OFF)
 
 set(CMAKE_CXX_STANDARD 11)
-set(COMPILE_FLAGS "-Wall -Wno-missing-braces")
+set(COMPILE_FLAGS "-Wall -Wno-missing-braces -Wno-write-strings")
 set(GTEST_FLAGS "-lgtest")
 set(LINK_FLAGS "-lpthread")
 

@@ -7,8 +7,10 @@
 
 
 include_directories(Image)
+include_directories(FlagParser)
 
 add_subdirectory( average )
 add_subdirectory( basic )
 add_subdirectory( dummy )
 add_subdirectory( dummy-time )
+add_subdirectory( flagparser )
