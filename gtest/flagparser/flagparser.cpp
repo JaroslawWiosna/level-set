@@ -21,11 +21,13 @@ TEST(Test, flagparser01)
 	//argvt[1] = "-i";
 	//argvt[2] = "my/path/to/file.jpg";
 
-	char * argvt [] = {"level-set", "-i", "my/path/to/file.jpg"};
+	const char * constargvt [] = {"level-set", "-i", "my/path/to/file.jpg"};
+	char * argvt [3];
+	memcpy(argvt, constargvt, sizeof(constargvt));
 
 	FlagParser parser(argct, argvt);
 
-	//parser.printFlags();
+	parser.printFlags();
 	
 	auto flags = parser.getFlags();
 
