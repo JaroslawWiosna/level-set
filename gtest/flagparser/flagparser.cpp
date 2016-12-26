@@ -21,7 +21,7 @@ TEST(Test, flagparser01)
 	//argvt[1] = "-i";
 	//argvt[2] = "my/path/to/file.jpg";
 
-	const char * argvt [] = {"level-set", "-i", "my/path/to/file.jpg"};
+	char * argvt [] = {"level-set", "-i", "my/path/to/file.jpg"};
 
 	FlagParser parser(argct, argvt);
 
