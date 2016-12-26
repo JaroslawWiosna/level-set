@@ -12,6 +12,7 @@
 ## Overview
 
 The main purpose is to detect objects using **active contour**.
+Implementation based on [Pascal Getreuer, Chan-Vese Segmentation, Image Processing On Line, 2 (2012), pp. 214–224](http://www.ipol.im/pub/art/2012/g-cv)
 
 ## Usage
 
