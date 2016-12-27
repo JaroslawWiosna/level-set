@@ -256,16 +256,7 @@ void Image::setDt(float value)
 }
 
 void Image::savePhi()
-{/*
-    cv::Mat phiImage(rows, cols, cv::DataType<uchar>::type);
-    for (std::size_t i = 0; i < rows; ++i)
-        for (std::size_t j = 0; j < cols; ++j)
-        {
-            phiImage.at<uchar>(i,j) = phi[i][j];
-        }
-    
-    cv::imwrite("phi.jpg",phiImage);*/
-    
+{    
     cv::Mat3b rec(rows, cols, cv::Vec3b(0,0,0));
 	for (std::size_t i = 0; i < rows; ++i)
 		for (std::size_t j = 0; j < cols; ++j)
