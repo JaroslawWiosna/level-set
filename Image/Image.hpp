@@ -35,6 +35,11 @@ private:
 	float lambda2;
 	float eps;
 	float dt;
+        
+        int sub_i;  //substraction from i
+        int sub_j;  //substraction from i
+        int add_i;  //addition to i
+        int add_j;  //addition to j
 	
 	void initImage(const std::string& filename, int flags);
 	void initFimage(); 

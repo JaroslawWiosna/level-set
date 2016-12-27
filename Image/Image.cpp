@@ -98,6 +98,7 @@ void Image::displayPhi()
 }
 void Image::detectBorders()
 {
+        
 	bool should_continue = true;
 	for (std::size_t step = 0; step < 20 && should_continue; ++step)
    		{
@@ -110,41 +111,55 @@ void Image::detectBorders()
 
 		std::cout << "c1=" << c1 << " c2=" << c2 << std::endl;
 
-		for (std::size_t i = 1; i < rows-1; ++i)
-			for (std::size_t j = 1; j < cols-1; ++j)
+		for (std::size_t i = 0; i < rows; ++i)
+			for (std::size_t j = 0; j < cols; ++j)
 			{
-
+               
+                sub_i = 0;
+                sub_j = 0;
+                add_i = 0;
+                add_j = 0;
+                
+                if (i == 0)
+                    add_i++;
+                if (j == 0)
+                    add_j++;
+                if (i == rows-1)
+                    sub_i++;
+                if (i == cols-1)
+                    sub_j++;
+                
                auto A = 
                    [&](int i, int j, float ** phi, float & mi, float & eta)
 	    -> float { 
                        return mi / (sqrt( pow(eta,2) 
-		    + pow((phi[i+1][j] - phi[i][j]),2) 
-		    + pow((phi[i][j+1] - phi[i][j-1])/2.0,2) ));
+		    + pow((phi[i-sub_i+1][j] - phi[i][j]),2) 
+		    + pow((phi[i][j-sub_j+1] - phi[i][j+add_j-1])/2.0,2) ));
 	    };
                auto B = 
                    [&](int i, int j, float ** phi, float & mi, float & eta)
-	    -> float { 
+	    -> float {
                        return mi / (sqrt( pow(eta,2) 
-                           + pow((phi[i+1][j] - phi[i-1][j]/2.0),2) 
-		    + pow((phi[i][j] - phi[i+1][j])/2.0,2) ));
+                           + pow((phi[i-sub_i+1][j] - phi[i+add_i-1][j]/2.0),2) 
+		    + pow((phi[i][j] - phi[i-sub_i+1][j])/2.0,2) ));
 	    };
                
 	auto old_value = phi[i][j];
 	        phi[i][j] = 
                    ( phi[i][j] 
 	        + dt * (eps/( M_PI * (pow(eps,2) + pow(phi[i][j],2))))
-	        * A(i,j,phi,mi,eta) *  phi[i+1][j] 
-		+ A(i-1,j,phi,mi,eta) * phi[i-1][j] 
-		+ B(i,j,phi,mi,eta) * phi[i][j+1] 
-		+ B(i,j-1,phi,mi,eta) * phi[i][j-1] 
+	        * A(i,j,phi,mi,eta) *  phi[i-sub_i+1][j] 
+		+ A(i+add_i-1,j,phi,mi,eta) * phi[i+add_i-1][j] 
+		+ B(i,j,phi,mi,eta) * phi[i][j-sub_j+1] 
+		+ B(i,j+add_j-1,phi,mi,eta) * phi[i][j+add_j-1] 
 		- ni 
 		- lambda1 * pow(fimage[i][j] - c1,2) 
 		- lambda2*pow(fimage[i][j] - c2,2) )
                    / 
                    ( 1 + dt 
 	        * (eps / ( M_PI * ( pow(eps,2) + pow( phi[i][j],2) ))) 
-	        * (A(i,j,phi,mi,eta) + A(i-1,j,phi,mi,eta) 
-                       + B(i,j,phi,mi,eta) + B(i,j-1,phi,mi,eta))  ) ;
+	        * (A(i,j,phi,mi,eta) + A(i+add_i-1,j,phi,mi,eta) 
+                       + B(i,j,phi,mi,eta) + B(i,j+add_j-1,phi,mi,eta))  ) ;
                 if ( phi[i][j] - old_value > 0.0000001 ) 
                {
 	        should_continue = true;
