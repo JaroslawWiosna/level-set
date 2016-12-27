@@ -20,7 +20,7 @@ Implementation based on [Pascal Getreuer, Chan-Vese Segmentation, Image Processi
   - `cd build`
   - `cmake ..` or `cmake -DBUILD_TESTS=ON` if you want to build gtests
   - `make`
-  - `./level-set ../test-images/001.jpg`
+  - `./level-set -i ../test-images/001.jpg`
 
 ## Timeline
   - `28.11.2016` - start
