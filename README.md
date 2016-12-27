@@ -12,6 +12,7 @@
 ## Overview
 
 The main purpose is to detect objects using **active contour**.
+Implementation based on [Pascal Getreuer, Chan-Vese Segmentation, Image Processing On Line, 2 (2012), pp. 214–224](http://www.ipol.im/pub/art/2012/g-cv)
 
 ## Usage
 
@@ -19,7 +20,7 @@ The main purpose is to detect objects using **active contour**.
   - `cd build`
   - `cmake ..` or `cmake -DBUILD_TESTS=ON` if you want to build gtests
   - `make`
-  - `./level-set ../test-images/001.jpg`
+  - `./level-set -i ../test-images/001.jpg`
 
 ## Timeline
   - `28.11.2016` - start
