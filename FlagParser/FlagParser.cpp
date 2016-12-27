@@ -12,6 +12,9 @@
 #include "FlagParser.hpp"
 #include <cstdio>
 
+/*
+ * Constructor
+ */
 FlagParser::FlagParser(int argc, char* argv[])
 {
 	std::vector<std::string> vargv(argv + 1, argv + argc);
@@ -23,6 +26,13 @@ FlagParser::~FlagParser()
 	//
 }
 
+/*
+ * parsing method
+ *
+ * Takes an argument which is argv as a vector of strings
+ * As a result 'flags' field of type map of two strings is set as 
+ * a vector of pair of flag and value.
+ */ 
 void FlagParser::parse(std::vector<std::string> vargv)
 {
 	const std::string prefix = "-";
