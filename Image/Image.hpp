@@ -43,7 +43,7 @@ private:
 	
 	void initImage(const std::string& filename, int flags);
 	void initFimage(); 
-	void initPhi();
+	void initPhi(int type = 1);    //default sinus initialization, 2 <- circle
 	void destroyFimage();
 	void destroyPhi();
 	float Heaviside(float data);
