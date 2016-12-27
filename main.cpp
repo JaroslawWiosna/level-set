@@ -23,5 +23,6 @@ int main(int argc, char** argv )
     image.displayPhi();
     image.detectBorders();
     image.displayPhi();
+    image.savePhi();
     return 0;
 }

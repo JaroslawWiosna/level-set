@@ -64,6 +64,7 @@ public:
 	void setLambda2(float value);
 	void setEps(float value);
 	void setDt(float value);
+        void savePhi();
 
 };
 			
