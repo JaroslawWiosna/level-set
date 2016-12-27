@@ -56,7 +56,7 @@ void Image::initFimage()
 		}
 }
 
-void Image::initPhi()
+void Image::initPhi(int type)
 {
 	phi= new float*[rows];
 	for(int i = 0; i < rows; ++i)
@@ -65,6 +65,9 @@ void Image::initPhi()
 	for (std::size_t i = 0; i < rows; ++i)
        		for (std::size_t j = 0; j < cols; ++j)
        		{
+                    if (type == 1)
+                        phi[i][j] = sin( M_PI *i/5)*sin( M_PI *j/5);
+                    if (type == 2)
         		phi[i][j] = 100 - sqrt( (rows/2-i)*(rows/2-i) + (cols/2-j)*(cols/2-j) ); 
 			//Middle point of a circle depends on image size 
     			//phi[i][j] = Heaviside(phi[i][j]);
