@@ -274,22 +274,22 @@ void Image::savePhi()
     cv::imwrite("phi.jpg",rec);
 }
 
-void Image::displayPhioninputImage(const std::string& filename)
+void Image::displayPhiOnInputImage(const std::string& filename)
 {
-    cv::Mat phionimage = cv::imread(filename, cv::IMREAD_COLOR);
+    cv::Mat phiOnImage = cv::imread(filename, cv::IMREAD_COLOR);
     for (std::size_t i = 0; i < rows; ++i)
         for (std::size_t j = 0; j < cols; ++j)
         {
             if(std::abs(phi[i][j]) < 100)
-               			phionimage.at<cv::Vec3b>(i,j)[1] = 105;
+               			phiOnImage.at<cv::Vec3b>(i,j)[1] = 105;
            		if(std::abs(phi[i][j]) < 10)
-        	       		phionimage.at<cv::Vec3b>(i,j)[1] = 155;
+        	       		phiOnImage.at<cv::Vec3b>(i,j)[1] = 155;
 			if(std::abs(phi[i][j]) < 1)
-				phionimage.at<cv::Vec3b>(i,j)[1] = 205;
+				phiOnImage.at<cv::Vec3b>(i,j)[1] = 205;
 			if(std::abs(phi[i][j]) < 0.1)
-				phionimage.at<cv::Vec3b>(i,j)[1] = 255;
+				phiOnImage.at<cv::Vec3b>(i,j)[1] = 255;
         }
     
-    cv::imshow("Phi on inputImage",phionimage);
+    cv::imshow("Phi on inputImage",phiOnImage);
     cv::waitKey(0);
 }
