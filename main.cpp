@@ -23,6 +23,7 @@ int main(int argc, char** argv )
     image.displayPhi();
     image.detectBorders();
     image.displayPhi();
+    image.displayPhiOnInputImage(flags["-i"]);
     image.savePhi();
     return 0;
 }

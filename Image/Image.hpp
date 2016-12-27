@@ -65,6 +65,7 @@ public:
 	void setEps(float value);
 	void setDt(float value);
         void savePhi();
+        void displayPhiOnInputImage(const std::string& filename);
 
 };
 			

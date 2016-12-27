@@ -166,6 +166,7 @@ void Image::detectBorders()
         }
     }
 		displayPhi();
+		//displayPhioninputImage("../test-images/008.jpg");
    		}
 }
 
@@ -271,4 +272,24 @@ void Image::savePhi()
 				rec[i][j] = cv::Vec3b(0,255,0);
        		}
     cv::imwrite("phi.jpg",rec);
+}
+
+void Image::displayPhiOnInputImage(const std::string& filename)
+{
+    cv::Mat phiOnImage = cv::imread(filename, cv::IMREAD_COLOR);
+    for (std::size_t i = 0; i < rows; ++i)
+        for (std::size_t j = 0; j < cols; ++j)
+        {
+            if(std::abs(phi[i][j]) < 100)
+               			phiOnImage.at<cv::Vec3b>(i,j)[1] = 105;
+           		if(std::abs(phi[i][j]) < 10)
+        	       		phiOnImage.at<cv::Vec3b>(i,j)[1] = 155;
+			if(std::abs(phi[i][j]) < 1)
+				phiOnImage.at<cv::Vec3b>(i,j)[1] = 205;
+			if(std::abs(phi[i][j]) < 0.1)
+				phiOnImage.at<cv::Vec3b>(i,j)[1] = 255;
+        }
+    
+    cv::imshow("Phi on inputImage",phiOnImage);
+    cv::waitKey(0);
 }
