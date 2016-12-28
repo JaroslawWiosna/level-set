@@ -37,5 +37,4 @@ TBD
 
 ## Licence
 
-TBD
-
+[Mozilla Public License Version 2.0](https://github.com/JaroslawWiosna/level-set/blob/master/LICENCE)
