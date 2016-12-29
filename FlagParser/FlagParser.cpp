@@ -44,7 +44,7 @@ void FlagParser::parse(std::vector<std::string> vargv)
 		if(it->substr(0, prefix.size()) == prefix)
 		{
 			//
-			if (it == vargv.end())
+			if (it == vargv.end()-1)
 			{
 				//std::cout << "endit=" << *it << std::endl;
 				flags[*it] = "";
