@@ -23,7 +23,33 @@ TEST(Test, flagparser01)
 	auto flags = parser.getFlags();
 
 	ASSERT_EQ(flags["-i"], "my/path/to/file.jpg");
-	ASSERT_TRUE(true);
+}
+
+TEST(Test, flagparser02)
+{
+	int argct = 4;
+	const char * argvt [] = {"level-set", "-i", "my/path/to/file.jpg"};
+	FlagParser parser(argct, const_cast<char**>(argvt));
+
+	parser.printFlags();
+	
+	auto flags = parser.getFlags();
+
+	ASSERT_EQ(flags["-i"], "my/path/to/file.jpg");
+}
+
+TEST(Test, flagparser03)
+{
+	int argct = 6;
+	const char * argvt [] = {"level-set", "-i", "my/path/to/file.jpg", "-qqq", "1959"};
+	FlagParser parser(argct, const_cast<char**>(argvt));
+
+	parser.printFlags();
+	
+	auto flags = parser.getFlags();
+
+	ASSERT_EQ(flags["-i"], "my/path/to/file.jpg");
+	ASSERT_EQ(flags["-v"], "1959");
 }
 
 int main(int argc, char* argv[])
