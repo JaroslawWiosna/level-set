@@ -14,7 +14,7 @@
 
 TEST(Test, flagparser01)
 {
-	int argct = 3;
+	int argct = 4;
 	const char * argvt [] = {"level-set", "-i", "my/path/to/file.jpg"};
 	FlagParser parser(argct, const_cast<char**>(argvt));
 
@@ -49,7 +49,7 @@ TEST(Test, flagparser03)
 	auto flags = parser.getFlags();
 
 	ASSERT_EQ(flags["-i"], "my/path/to/file.jpg");
-	ASSERT_EQ(flags["-v"], "1959");
+	ASSERT_EQ(flags["-qqq"], "1959");
 }
 
 int main(int argc, char* argv[])
