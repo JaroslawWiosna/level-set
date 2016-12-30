@@ -58,12 +58,19 @@ public:
 	void displayPhi();
 	void detectBorders();
 	void setMi(float value);
+	void setMi(std::string value);
 	void setEta(float value);
+	void setEta(std::string value);
 	void setNi(float value);
+	void setNi(std::string value);
 	void setLambda1(float value);
+	void setLambda1(std::string value);
 	void setLambda2(float value);
+	void setLambda2(std::string value);
 	void setEps(float value);
+	void setEps(std::string value);
 	void setDt(float value);
+	void setDt(std::string value);
         void savePhi();
         void displayPhiOnInputImage(const std::string& filename);
 

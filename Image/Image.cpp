@@ -229,9 +229,19 @@ void Image::setMi(float value)
 	mi = value;
 }
 
+void Image::setMi(std::string value)
+{
+	mi = std::stof(value);
+}
+
 void Image::setEta(float value)
 {
 	eta = value;
+}
+
+void Image::setEta(std::string value)
+{
+	eta = std::stof(value);
 }
 
 void Image::setNi(float value)
@@ -239,9 +249,19 @@ void Image::setNi(float value)
 	ni = value;
 }
 
+void Image::setNi(std::string value)
+{
+	ni = std::stof(value);
+}
+
 void Image::setLambda1(float value)
 {
 	lambda1 = value;
+}
+
+void Image::setLambda1(std::string value)
+{
+	lambda1 = std::stof(value);
 }
 
 void Image::setLambda2(float value)
@@ -249,14 +269,29 @@ void Image::setLambda2(float value)
 	lambda2 = value;
 }
 
+void Image::setLambda2(std::string value)
+{
+	lambda2 = std::stof(value);
+}
+
 void Image::setEps(float value)
 {
 	eps = value;
 }
 
+void Image::setEps(std::string value)
+{
+	eps = std::stof(value);
+}
+
 void Image::setDt(float value)
 {
 	dt = value;
+}
+
+void Image::setDt(std::string value)
+{
+	dt = std::stof(value);
 }
 
 void Image::savePhi()

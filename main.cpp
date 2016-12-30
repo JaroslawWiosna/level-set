@@ -20,6 +20,27 @@ int main(int argc, char** argv )
 
     Image image(flags["-i"], cv::IMREAD_GRAYSCALE );
 
+    if (!flags["-mi"].empty())
+        image.setMi(flags["-mi"]);
+    if (!flags["-eta"].empty())
+        image.setEta(flags["-eta"]);
+    if (!flags["-ni"].empty())
+        image.setNi(flags["-ni"]);
+    if (!flags["-lambda1"].empty())
+        image.setLambda1(flags["-lambda1"]);
+    if (!flags["-lambda2"].empty())
+        image.setLambda2(flags["-lambda2"]);
+    if (!flags["-lambda"].empty())
+    {
+        image.setLambda1(flags["-lambda"]);
+        image.setLambda2(flags["-lambda"]);
+    }
+    if (!flags["-eps"].empty())
+        image.setEps(flags["-eps"]);
+    if (!flags["-dt"].empty())
+        image.setDt(flags["-dt"]);
+    
+
     image.displayPhi();
     image.detectBorders();
     image.displayPhi();
