@@ -26,12 +26,24 @@ FlagParser::~FlagParser()
 	//
 }
 
-/*
- * parsing method
+/**
+ * @brief parsing method
+ *
+ * @param vector of strings, which should be a argv, but instead of char**
+ *  type, param is a vector of strings, as written earier
  *
  * Takes an argument which is argv as a vector of strings
- * As a result 'flags' field of type map of two strings is set as 
+ * As a result 'flags' field (of type map of two strings) is set as 
  * a vector of pair of flag and value.
+ *
+ * Basicly, method iterates through all strings in vargv. If 'flag' is 
+ * found (and by flag I mean the string begins with "-" sign 
+ * (ASCII 46 (0x2E)) then:
+ * if the flag is the last one in vargv, the value is set to an empty string.
+ * If not, the next string (if only does not begin with "-" sign)
+ * is assumed to be the value of the flag. 
+ * 
+ * @return none
  */ 
 void FlagParser::parse(std::vector<std::string> vargv)
 {
