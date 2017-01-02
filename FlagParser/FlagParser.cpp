@@ -12,8 +12,12 @@
 #include "FlagParser.hpp"
 #include <cstdio>
 
-/*
+/**
  * Constructor
+ *
+ * Creates a vector of stings with 'argv' except for the first element
+ * (which is the name of program) then passes it to parsing method.
+ *
  */
 FlagParser::FlagParser(int argc, char* argv[])
 {
@@ -43,6 +47,7 @@ FlagParser::~FlagParser()
  * If not, the next string (if only does not begin with "-" sign)
  * is assumed to be the value of the flag. 
  * 
+ * If the flag (and value) is given more then once, the very last only matters
  * @return none
  */ 
 void FlagParser::parse(std::vector<std::string> vargv)
