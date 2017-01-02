@@ -51,7 +51,7 @@ private:
 
 	FRIEND_TEST(Test,basic1); // FIXME
 public:
-	Image(const std::string& filename, int flags);
+	Image(const std::string& filename, int flag=cv::IMREAD_GRAYSCALE);
 	Image(Image const&) = delete;
 	Image(Image const&&) = delete;
 	~Image();

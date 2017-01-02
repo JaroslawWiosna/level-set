@@ -18,7 +18,7 @@ int main(int argc, char** argv )
     parser.printFlags();
     auto flags = parser.getFlags();
 
-    Image image(flags["-i"], cv::IMREAD_GRAYSCALE );
+    Image image(flags["-i"]);
 
     if (!flags["-mi"].empty())
         image.setMi(flags["-mi"]);

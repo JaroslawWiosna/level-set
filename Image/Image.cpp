@@ -13,9 +13,15 @@
 #include <cstdio>
 #include <opencv2/opencv.hpp>
 
-Image::Image(const std::string& filename, int flags=1)
+/**
+ * Constructor
+ *
+ * @param [in] filename - path to the image
+ * @param [in] flag - default value is equal to cv::IMREAD_GRAYSCALE
+ */
+Image::Image(const std::string& filename, int flag)
 {
-	initImage(filename, flags);
+	initImage(filename, flag);
 	rows = inputImage.rows;
 	cols = inputImage.cols;
 
@@ -25,11 +31,11 @@ Image::Image(const std::string& filename, int flags=1)
 	//default values
 	mi = 0.2;
 	eta = 0.00000001;
-	ni = 0.00000001;
-	lambda1 = 0.300002;
-	lambda2 = 0.300002;
-	eps = 1000;
-	dt = 0.001; // timestep
+	ni = FLT_MIN;
+	lambda1 = 1;
+	lambda2 = 1;
+	eps = 1;
+	dt = 0.5; // timestep
 }
 
 Image::~Image()
