@@ -3,7 +3,6 @@
 > Team project - Cyfrowe techniki rozpoznawania obrazów (pl. "Digital image recognition methods") 2016/2017
 
   - [Overview](#overview)
-  - [Installation](#installation)
   - [Usage](#usage)
   - [Timeline](#timeline)
   - [Credits](#credits)
@@ -13,14 +12,15 @@
 ## Overview
 
 The main purpose is to detect objects using **active contour**.
-
-## Installation
-
-TBD
+Implementation based on [Pascal Getreuer, Chan-Vese Segmentation, Image Processing On Line, 2 (2012), pp. 214–224](http://www.ipol.im/pub/art/2012/g-cv)
 
 ## Usage
 
-TBD
+  - `mkdir -p build`
+  - `cd build`
+  - `cmake ..` or `cmake -DBUILD_TESTS=ON` if you want to build gtests
+  - `make`
+  - `./level-set -i ../test-images/001.jpg`
 
 ## Timeline
   - `28.11.2016` - start
@@ -37,5 +37,4 @@ TBD
 
 ## Licence
 
-TBD
-
+[Mozilla Public License Version 2.0](https://github.com/JaroslawWiosna/level-set/blob/master/LICENCE)

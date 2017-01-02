@@ -6,17 +6,17 @@
 #
 
 
-project(test-dummy)
+project(test-basic)
 
 file(GLOB src
   "*.cpp"
 )
-
-add_executable(${PROJECT_NAME} ${src} )
+add_executable(${PROJECT_NAME} ${src} ../../Image/Image.cpp )
 
 target_link_libraries(
   ${PROJECT_NAME} 
-  ${LINK_FLAGS}
+  ${LINK_FLAGS} 
+  ${OpenCV_LIBS} 
 )
 
 

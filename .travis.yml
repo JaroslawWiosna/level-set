@@ -5,6 +5,7 @@ language: cpp
 
 compiler:
     - gcc
+#    - clang
 
 install:
     - if [ "$CXX" = "g++" ]; then export CXX="g++-6"; fi
@@ -20,7 +21,7 @@ addons:
             - libgtest-dev
             - cmake
             - cmake-data
-            - libboost-all-dev
+#            - libboost-all-dev
 
 before_script:
     - "cd /usr/src/gtest && sudo cmake . && sudo cmake --build . && sudo mv libg* /usr/local/lib/ ; cd -"
@@ -28,5 +29,7 @@ before_script:
 script: 
     - mkdir build
     - cd build
-    - cmake .. 
-    - make VERBOSE=1
+    - cmake -DBUILD_TESTS=ON .. 
+    - make
+    - make test
+
