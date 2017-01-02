@@ -12,8 +12,12 @@
 #include "FlagParser.hpp"
 #include <cstdio>
 
-/*
+/**
  * Constructor
+ *
+ * Creates a vector of stings with 'argv' except for the first element
+ * (which is the name of program) then passes it to parsing method.
+ *
  */
 FlagParser::FlagParser(int argc, char* argv[])
 {
@@ -26,12 +30,25 @@ FlagParser::~FlagParser()
 	//
 }
 
-/*
- * parsing method
+/**
+ * @brief parsing method
+ *
+ * @param vector of strings, which should be a argv, but instead of char**
+ *  type, param is a vector of strings, as written earier
  *
  * Takes an argument which is argv as a vector of strings
- * As a result 'flags' field of type map of two strings is set as 
+ * As a result 'flags' field (of type map of two strings) is set as 
  * a vector of pair of flag and value.
+ *
+ * Basicly, method iterates through all strings in vargv. If 'flag' is 
+ * found (and by flag I mean the string begins with "-" sign 
+ * (ASCII 46 (0x2E)) then:
+ * if the flag is the last one in vargv, the value is set to an empty string.
+ * If not, the next string (if only does not begin with "-" sign)
+ * is assumed to be the value of the flag. 
+ * 
+ * If the flag (and value) is given more then once, the very last only matters
+ * @return none
  */ 
 void FlagParser::parse(std::vector<std::string> vargv)
 {
@@ -44,7 +61,7 @@ void FlagParser::parse(std::vector<std::string> vargv)
 		if(it->substr(0, prefix.size()) == prefix)
 		{
 			//
-			if (it == vargv.end())
+			if (it == vargv.end()-1)
 			{
 				//std::cout << "endit=" << *it << std::endl;
 				flags[*it] = "";

@@ -14,16 +14,67 @@
 
 TEST(Test, flagparser01)
 {
-	int argct = 3;
+	constexpr int argct = 3;
 	const char * argvt [] = {"level-set", "-i", "my/path/to/file.jpg"};
 	FlagParser parser(argct, const_cast<char**>(argvt));
 
-	parser.printFlags();
+	//parser.printFlags();
 	
 	auto flags = parser.getFlags();
 
 	ASSERT_EQ(flags["-i"], "my/path/to/file.jpg");
-	ASSERT_TRUE(true);
+}
+
+TEST(Test, flagparser02)
+{
+	constexpr int argct = 3;
+	const char * argvt [] = {"level-set", "-i", "my/path/to/file.jpg"};
+	FlagParser parser(argct, const_cast<char**>(argvt));
+
+	//parser.printFlags();
+	
+	auto flags = parser.getFlags();
+
+	ASSERT_EQ(flags["-i"], "my/path/to/file.jpg");
+}
+
+TEST(Test, flagparser03)
+{
+	constexpr int argct = 5;
+	const char * argvt [] = {"level-set", "-i", "my/path/to/file.jpg", "-qqq", "1959"};
+	FlagParser parser(argct, const_cast<char**>(argvt));
+
+	//parser.printFlags();
+	
+	auto flags = parser.getFlags();
+
+	ASSERT_EQ(flags["-i"], "my/path/to/file.jpg");
+	ASSERT_EQ(flags["-qqq"], "1959");
+}
+
+TEST(Test, flagparser04)
+{
+	constexpr int argct = 9;
+	const char * argvt [] = {
+		"level-set", 
+		"-i", 
+		"my/path/to/file.jpg", 
+		"-qqq", 
+		"1959",
+		"-lambda1",
+		"0.002",
+		"-qqq", 
+		"987"
+	};
+	FlagParser parser(argct, const_cast<char**>(argvt));
+
+	//parser.printFlags();
+	
+	auto flags = parser.getFlags();
+
+	ASSERT_EQ(flags["-i"], "my/path/to/file.jpg");
+	ASSERT_EQ(flags["-qqq"], "987");
+	ASSERT_EQ(flags["-lambda1"], "0.002");
 }
 
 int main(int argc, char* argv[])
