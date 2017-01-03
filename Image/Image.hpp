@@ -14,7 +14,6 @@
 
 #include <cstdio>
 #include <opencv2/opencv.hpp>
-//#include <gtest/gtest.h> //for FRIEND_TEST FIXME: We don't want gtest required as default
 class Image {
 
 private:
@@ -49,9 +48,9 @@ private:
 	float Heaviside(float data);
 	void updateAverages();
 
-//	FRIEND_TEST(Test,basic1); // FIXME
 public:
 	Image(const std::string& filename, int flag=cv::IMREAD_GRAYSCALE);
+	Image(std::map<std::string, std::string> flags);
 	Image(Image const&) = delete;
 	Image(Image const&&) = delete;
 	~Image();

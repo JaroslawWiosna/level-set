@@ -38,6 +38,51 @@ Image::Image(const std::string& filename, int flag)
 	dt = 0.5; // timestep
 }
 
+/**
+ * Constructor
+ *
+ * @param [in] TODO:
+ */
+Image::Image(std::map<std::string, std::string> flags)
+{
+	initImage(flags["-i"], cv::IMREAD_GRAYSCALE);
+	rows = inputImage.rows;
+	cols = inputImage.cols;
+
+	initFimage();
+	initPhi();
+
+	//default values
+	mi = 0.2;
+	eta = 0.00000001;
+	ni = FLT_MIN;
+	lambda1 = 1;
+	lambda2 = 1;
+	eps = 1;
+	dt = 0.5; // timestep
+
+	if (!flags["-mi"].empty())
+		setMi(flags["-mi"]);
+ 	if (!flags["-eta"].empty())
+ 		setEta(flags["-eta"]);
+ 	if (!flags["-ni"].empty())
+ 		setNi(flags["-ni"]);
+ 	if (!flags["-lambda1"].empty())
+		setLambda1(flags["-lambda1"]);
+	if (!flags["-lambda2"].empty())
+ 		setLambda2(flags["-lambda2"]);
+	if (!flags["-lambda"].empty())
+	{
+		setLambda1(flags["-lambda"]);
+		setLambda2(flags["-lambda"]);
+	}
+	if (!flags["-eps"].empty())
+		setEps(flags["-eps"]);
+	if (!flags["-dt"].empty())
+		setDt(flags["-dt"]);
+ 
+}
+
 Image::~Image()
 {
 	destroyFimage();
