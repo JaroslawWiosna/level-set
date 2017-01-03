@@ -16,8 +16,8 @@
 #include <opencv2/opencv.hpp>
 #include <gtest/gtest.h> //for FRIEND_TEST FIXME: We don't want gtest required as default
 class Image {
-
-private:
+	//friend class ExperimImage;
+protected:
 	cv::Mat inputImage;
 
 	

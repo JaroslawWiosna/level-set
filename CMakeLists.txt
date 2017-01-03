@@ -17,6 +17,7 @@ add_executable(
 	level-set 
 	main.cpp 
 	Image/Image.cpp 
+	ExperimImage/ExperimImage.cpp 
 	FlagParser/FlagParser.cpp
 	)
 target_link_libraries( level-set ${OpenCV_LIBS} )
@@ -33,6 +34,7 @@ if(BUILD_TESTS)
 endif()
 include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories(Image)
+include_directories(ExperimImage)
 include_directories(FlagParser)
 
 enable_testing()

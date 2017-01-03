@@ -10,6 +10,7 @@
 #include <cstdio>
 #include <opencv2/opencv.hpp>
 #include "Image.hpp"
+#include "ExperimImage.hpp"
 #include "FlagParser.hpp"
 
 int main(int argc, char** argv )
