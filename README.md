@@ -42,6 +42,8 @@ TBD
 ```
 Ifstead of `cmake ..` type `cmake -DBUILD_TESTS=ON` if you want to build gtests.
 
+---
+
 ## Timeline
   - `28.11.2016` - start
   - `16.01.2017` - project will have been finished by this date
@@ -54,8 +56,11 @@ TBD
 ## Contributors
 
 [![GitHub contributors](https://img.shields.io/github/contributors/JaroslawWiosna/level-set.svg)]()
+
 [contributors](https://github.com/JaroslawWiosna/level-set/graphs/contributors)
 
 ## Licence
+
+[![Licence](https://img.shields.io/github/license/JaroslawWiosna/level-set.svg)]()
 
 [Mozilla Public License Version 2.0](https://github.com/JaroslawWiosna/level-set/blob/master/LICENCE)
