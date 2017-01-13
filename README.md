@@ -1,4 +1,10 @@
 [![Build Status](https://travis-ci.com/JaroslawWiosna/level-set.svg?token=o1NhkEzXPpzaim9ynHJS&branch=master)](https://travis-ci.com/JaroslawWiosna/level-set)
+[![Pull Requests](https://img.shields.io/github/issues-pr/JaroslawWiosna/level-set.svg)](https://github.com/JaroslawWiosna/level-set/pulls)
+
+[![Licence](https://img.shields.io/github/license/JaroslawWiosna/level-set.svg)]()
+[![Release](https://img.shields.io/github/release/JaroslawWiosna/level-set.svg?maxAge=3600)](https://github.com/JaroslawWiosna/level-set/releases)
+[![GitHub contributors](https://img.shields.io/github/contributors/JaroslawWiosna/level-set.svg)]()
+
 # level-set
 > Team project - Cyfrowe techniki rozpoznawania obrazów (pl. "Digital image recognition methods") 2016/2017
 
