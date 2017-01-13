@@ -34,6 +34,8 @@ private:
 	float lambda2;
 	float eps;
 	float dt;
+	
+	std::size_t steps;
         
         int sub_i;  //substraction from i
         int sub_j;  //substraction from i
@@ -70,6 +72,8 @@ public:
 	void setEps(std::string value);
 	void setDt(float value);
 	void setDt(std::string value);
+	void setSteps(float value);
+	void setSteps(std::string value);
         void savePhi();
         void displayPhiOnInputImage(const std::string& filename);
 
