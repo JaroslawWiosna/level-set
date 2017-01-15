@@ -11,6 +11,14 @@
   - [Overview](#overview)
      - [Basic algorithm](#basicalgorithm)
   - [C++11](#c++11)
+     - [Disable copy constructor and move constructor](#)
+     - [auto](#)
+     - [using](#)
+     - [lambdas](#)
+     - [curly brackets](#)
+     - [std::stof](#)
+     - [std::next](#)
+     - [Range-based loop](#)
   - [Usage](#usage)
   - [Timeline](#timeline)
   - [Credits](#credits)
@@ -39,7 +47,7 @@ TBD
 
 Why do we need C++11?
 
-1. Disable copy constructor and move constructor
+###### Disable copy constructor and move constructor
 
 ```c++
         Image(Image const&) = delete;  
@@ -50,22 +58,22 @@ C++11 allows to disabling these. In previous standards copy constructor could be
 
 [SO1](http://stackoverflow.com/questions/5687055/correct-use-of-delete-for-methods-in-classes), [SO2](http://stackoverflow.com/questions/6811037/whats-the-use-of-the-private-copy-constructor-in-c)
 
-2. auto
+###### auto
 
 TBD
 
-3. using keyword
+###### 'using' keyword
 
 ```c++
         using Flags = std::map<std::string, std::string>;
 ```
 Safer than MACROs
 
-4. lambdas
+###### lambdas
 
 TBD
 
-5. curly brackets initialization
+###### curly brackets initialization
 
 ```c++
         float sum_inside{}; // inside or on border
@@ -73,15 +81,15 @@ TBD
 
 TBD
 
-6. std::stof
+###### std::stof
 
 TBD
 
-7. std::next
+###### std::next
 
 TBD
 
-8. Range-based loop 
+###### Range-based loop 
 
 ```c++
         for (auto& i : flags)
