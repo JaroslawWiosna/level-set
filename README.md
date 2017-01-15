@@ -10,6 +10,7 @@
 
   - [Overview](#overview)
      - [Basic algorithm](#basicalgorithm)
+  - [C++11](#c++11)
   - [Usage](#usage)
   - [Timeline](#timeline)
   - [Credits](#credits)
@@ -31,6 +32,62 @@ TBD
 
 ![image005](http://i.imgur.com/v35MRXs.gif)
 
+
+---
+
+##C++11
+
+Why do we need C++11?
+
+1. Disable copy constructor and move constructor
+
+```c++
+        Image(Image const&) = delete;  
+        Image(Image const&&) = delete;  
+```
+Although there is no need for explicitly deleting (since we do not create new objects based on object created earlier), it could be good for documentation.
+C++11 allows to disabling these. In previous standards copy constructor could be defined as private, so the compiler woludn't allow to call it.
+
+[SO1](http://stackoverflow.com/questions/5687055/correct-use-of-delete-for-methods-in-classes), [SO2](http://stackoverflow.com/questions/6811037/whats-the-use-of-the-private-copy-constructor-in-c)
+
+2. auto
+
+TBD
+
+3. using keyword
+
+```c++
+        using Flags = std::map<std::string, std::string>;
+```
+Safer than MACROs
+
+4. lambdas
+
+TBD
+
+5. curly brackets initialization
+
+```c++
+        float sum_inside{}; // inside or on border
+```
+
+TBD
+
+6. std::stof
+
+TBD
+
+7. std::next
+
+TBD
+
+8. Range-based loop 
+
+```c++
+        for (auto& i : flags)
+```
+
+TBD
 
 ---
 
