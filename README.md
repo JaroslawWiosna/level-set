@@ -13,13 +13,14 @@
   - [C++11](#c++11)
      - [Disable copy constructor and move constructor](#disable-copy-constructor-and-move-constructor)
      - [auto](#auto)
-     - [using](#'using'-keyword)
+     - [using](#using-keyword)
      - [lambdas](#lambdas)
      - [curly brackets](#curly-brackets-initialization)
      - [std::stof](#stdstof)
      - [std::next](#stdnext)
      - [Range-based loop](#range-based-loop)
   - [Usage](#usage)
+  - [Results](#results)
   - [Timeline](#timeline)
   - [Credits](#credits)
   - [Contributors](#contributors)
@@ -101,7 +102,7 @@ TBD
 
 ## Usage
 
-```
+```sh
   $ mkdir -p build
   $ cd build
   $ cmake .. # or cmake -DBUILD_TESTS=ON if you want to build gtests
@@ -109,6 +110,14 @@ TBD
   $ ./level-set -i ../test-images/001.jpg
 ```
 Ifstead of `cmake ..` type `cmake -DBUILD_TESTS=ON` if you want to build gtests.
+
+---
+
+## Results
+
+![1-gif](http://i.imgur.com/8sYOx10.gif)
+![2-gif](http://i.imgur.com/EcmxG2T.gif)
+![3-gif](http://i.imgur.com/Db4lHSa.gif)
 
 ---
 
