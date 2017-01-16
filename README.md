@@ -11,14 +11,14 @@
   - [Overview](#overview)
      - [Basic algorithm](#basicalgorithm)
   - [C++11](#c++11)
-     - [Disable copy constructor and move constructor](#)
-     - [auto](#)
-     - [using](#)
-     - [lambdas](#)
-     - [curly brackets](#)
-     - [std::stof](#)
-     - [std::next](#)
-     - [Range-based loop](#)
+     - [Disable copy constructor and move constructor](#disable-copy-constructor-and-move-constructor)
+     - [auto](#auto)
+     - [using](#'using'-keyword)
+     - [lambdas](#lambdas)
+     - [curly brackets](#curly-brackets-initialization)
+     - [std::stof](#std::stof)
+     - [std::next](#std::next)
+     - [Range-based loop](#range-based-loop)
   - [Usage](#usage)
   - [Timeline](#timeline)
   - [Credits](#credits)
@@ -87,7 +87,7 @@ TBD
 
 ###### std::next
 
-TBD
+[http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4317.pdf](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4317.pdf)
 
 ###### Range-based loop 
 
