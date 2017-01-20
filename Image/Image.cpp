@@ -36,6 +36,7 @@ Image::Image(const std::string& filename, int flag)
 	lambda2 = 1;
 	eps = 1;
 	dt = 0.5; // timestep
+	steps = 2;
 }
 
 /**
@@ -60,6 +61,7 @@ Image::Image(std::map<std::string, std::string> flags)
 	lambda2 = 1;
 	eps = 1;
 	dt = 0.5; // timestep
+	steps = 2;
 
 	if (!flags["-mi"].empty())
 		setMi(flags["-mi"]);
@@ -80,6 +82,9 @@ Image::Image(std::map<std::string, std::string> flags)
 		setEps(flags["-eps"]);
 	if (!flags["-dt"].empty())
 		setDt(flags["-dt"]);
+ 
+	if (!flags["-steps"].empty())
+		setSteps(flags["-steps"]);
  
 }
 
@@ -154,7 +159,7 @@ void Image::detectBorders()
 {
         
 	bool should_continue = true;
-	for (std::size_t step = 0; step < 20 && should_continue; ++step)
+	for (std::size_t step = 0; step < steps && should_continue; ++step)
    		{
 		//should_continue = false;
 		updateAverages();
@@ -343,6 +348,16 @@ void Image::setDt(float value)
 void Image::setDt(std::string value)
 {
 	dt = std::stof(value);
+}
+
+void Image::setSteps(float value)
+{
+	steps = value;
+}
+
+void Image::setSteps(std::string value)
+{
+	steps = std::stof(value);
 }
 
 void Image::savePhi()
