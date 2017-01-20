@@ -50,9 +50,9 @@ Level set method is not easy, especially looking at it's equation.
 ![eq1](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/eq1.png),
 
 where C is enclosed area dividing image on three parts:
-- [laying outside C area]
-- [laying on a border of C area]
-- [laying inside C area]
+- laying outside C area
+- laying on a border of C area
+- laying inside C area
 
 ![eq2](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/eq2.png),
 
@@ -69,7 +69,7 @@ and sine:
 
 ![eq4](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/eq4.png),
 
-that gives a chessboard shape as a start initialization area, and what is more have fast convergence.
+that gives a chessboard shape as a start initialization area, and what is more - have fast convergence.
 
 The principle of operation of level set method is based on evolving only φ(x) function that equally change C area.
 
@@ -88,6 +88,8 @@ As said before parameters 𝜇, λ, ν, have huge impact on final effect - preci
 Here are some examples, how curvature of φ(x) function, changes with iterations:
 
 ![demo1](http://demo.ipol.im/demo/g_chan_vese_segmentation/tmp/2140C562AECD29658B8613F5410A768D/evolution.gif "Demo 1")![demo2](http://demo.ipol.im/demo/g_chan_vese_segmentation/tmp/6E0F903703A66B976AE828BC733499A3/evolution.gif "Demo 2")
+
+And here is an effect of our work:
 
 ![image005](http://i.imgur.com/v35MRXs.gif)
 
