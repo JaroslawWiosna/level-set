@@ -43,6 +43,10 @@ Implementation based on
 
 ![image005](https://upload.wikimedia.org/wikipedia/commons/0/00/Snake-contour-example.jpg)
 
+But snake model is not ideal one, because there have to be known edge of an object beforehand to properly segment data, that is why Chan-Vase used level set method to achieve that.
+
+Level set method is not easy, especially looking at it's equation.
+
 ![image005](http://i.imgur.com/v35MRXs.gif)
 
 
