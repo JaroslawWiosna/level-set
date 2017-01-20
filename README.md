@@ -30,14 +30,66 @@
 
 ## Overview
 
-The main purpose is to detect objects using **active contour**.
+In our “perfect” world there is more and more electronic devices that use discrete data as an input or/and output. The best example is digital camera, that saves recorded image as a binary numbers. Because output informations are numbers, and nowadays processors are powerful, so digital techniques could be used to extract some data from all samples - for example, to speed up some production or medical diagnosis processes.
+
+The main purpose of this project is to detect shape’s borders in images. It is based on “active contour without edges” model (proposed by Chan-Vase) using level set method.
 Implementation based on 
   - [Pascal Getreuer, Chan-Vese Segmentation, Image Processing On Line, 2 (2012), pp. 214–224](http://www.ipol.im/pub/art/2012/g-cv)
   - [Tony F. Chan, Luminita A. Vese Active Contours Without Edges IEEE TRANSACTIONS ON IMAGE PROCESSING, VOL. 10, NO. 2, FEBRUARY 2001](http://www.math.ucla.edu/~lvese/PAPERS/IEEEIP2001.pdf)
 
 ### Basic algorithm
 
-TBD
+“Active contour without edges” model is an evolution form of “active contour” model - also named as a “snake” model.
+
+![wiki1](https://upload.wikimedia.org/wikipedia/commons/0/00/Snake-contour-example.jpg)
+
+But snake model is not ideal one, because there have to be known edge of an object beforehand to properly segment data, that is why Chan-Vase used level set method to achieve that.
+
+Level set method is not easy, especially looking at it's equation.
+
+![eq1](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/eq1.png),
+
+where C is enclosed area dividing image on three parts:
+- laying outside C area
+- laying on a border of C area
+- laying inside C area
+
+![eq2](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/eq2.png),
+
+c1 is an average value of all pixels inside C area, and c2 is an average value of rest pixels.
+Other parameters like 𝜇, λ, ν, controls precisions and speed of calculations. 
+The main ingredient of level set method is level set function φ(x) that determines shape of C area.
+The starting initialization function φ(x) can be anything type, but the typical one are function for circle of radius:
+
+![eq3](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/eq3.png)
+
+![pic1](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/pic1.png)
+
+and sine:
+
+![eq4](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/eq4.png),
+
+that gives a chessboard shape as a start initialization area, and what is more - have fast convergence.
+
+The principle of operation of level set method is based on evolving only φ(x) function that equally change C area.
+
+The numerical equation is denote as:
+
+![eq5](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/eq5.png)
+
+Where A and B are coefficients specified as:
+
+![eq6](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/eq6.png)
+
+As said before parameters 𝜇, λ, ν, have huge impact on final effect - precision of segmentation. Too small or too big value can result in no segmentation at all.
+
+![pic2](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/pic2.png)
+
+Here are some examples, how curvature of φ(x) function, changes with iterations:
+
+![demo1](http://demo.ipol.im/demo/g_chan_vese_segmentation/tmp/2140C562AECD29658B8613F5410A768D/evolution.gif "Demo 1")![demo2](http://demo.ipol.im/demo/g_chan_vese_segmentation/tmp/6E0F903703A66B976AE828BC733499A3/evolution.gif "Demo 2")
+
+And here is an effect of our work:
 
 ![image005](http://i.imgur.com/v35MRXs.gif)
 
