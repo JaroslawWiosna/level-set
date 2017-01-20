@@ -30,14 +30,18 @@
 
 ## Overview
 
-The main purpose is to detect objects using **active contour**.
+In our “perfect” world there is more and more electronic devices that use discrete data as an input or/and output. The best example is digital camera, that saves recorded image as a binary numbers. Because output informations are numbers, and nowadays processors are powerful, so digital techniques could be used to extract some data from all samples - for example, to speed up some production or medical diagnosis processes.
+
+The main purpose of this project is to detect shape’s borders in images. It is based on “active contour without edges” model (proposed by Chan-Vase) using level set method.
 Implementation based on 
   - [Pascal Getreuer, Chan-Vese Segmentation, Image Processing On Line, 2 (2012), pp. 214–224](http://www.ipol.im/pub/art/2012/g-cv)
   - [Tony F. Chan, Luminita A. Vese Active Contours Without Edges IEEE TRANSACTIONS ON IMAGE PROCESSING, VOL. 10, NO. 2, FEBRUARY 2001](http://www.math.ucla.edu/~lvese/PAPERS/IEEEIP2001.pdf)
 
 ### Basic algorithm
 
-TBD
+“Active contour without edges” model is an evolution form of “active contour” model - also named as a “snake” model.
+
+![image005](https://upload.wikimedia.org/wikipedia/commons/0/00/Snake-contour-example.jpg)
 
 ![image005](http://i.imgur.com/v35MRXs.gif)
 
