@@ -41,33 +41,33 @@ Implementation based on
 
 “Active contour without edges” model is an evolution form of “active contour” model - also named as a “snake” model.
 
-![wiki1](https://upload.wikimedia.org/wikipedia/commons/0/00/Snake-contour-example.jpg)
+![wiki1](https://upload.wikimedia.org/wikipedia/commons/0/00/Snake-contour-example.jpg "source: https://en.wikipedia.org/wiki/Active_contour_model")
 
 But snake model is not ideal one, because there have to be known edge of an object beforehand to properly segment data, that is why Chan-Vase used level set method to achieve that.
 
 Level set method is not easy, especially looking at it's equation.
 
-![eq1](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/eq1.png),
+![eq1](https://github.com/JaroslawWiosna/level-set/blob/devel/rm-images/eq1.png "source: http://www.ipol.im/pub/art/2012/g-cv/article.pdf"),
 
 where C is enclosed area dividing image on three parts:
 - laying outside C area
 - laying on a border of C area
 - laying inside C area
 
-![eq2](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/eq2.png),
+![eq2](https://github.com/JaroslawWiosna/level-set/blob/devel/rm-images/eq2.png "source: http://www.ipol.im/pub/art/2012/g-cv/article.pdf")
 
 c1 is an average value of all pixels inside C area, and c2 is an average value of rest pixels.
 Other parameters like 𝜇, λ, ν, controls precisions and speed of calculations. 
 The main ingredient of level set method is level set function φ(x) that determines shape of C area.
 The starting initialization function φ(x) can be anything type, but the typical one are function for circle of radius:
 
-![eq3](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/eq3.png)
+![eq3](https://github.com/JaroslawWiosna/level-set/blob/devel/rm-images/eq3.png "source: http://www.ipol.im/pub/art/2012/g-cv/article.pdf")
 
-![pic1](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/pic1.png)
+![pic1](https://github.com/JaroslawWiosna/level-set/blob/devel/rm-images/pic1.png "source: http://www.ipol.im/pub/art/2012/g-cv/article.pdf")
 
 and sine:
 
-![eq4](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/eq4.png),
+![eq4](https://github.com/JaroslawWiosna/level-set/blob/devel/rm-images/eq4.png "source: http://www.ipol.im/pub/art/2012/g-cv/article.pdf"),
 
 that gives a chessboard shape as a start initialization area, and what is more - have fast convergence.
 
@@ -75,24 +75,23 @@ The principle of operation of level set method is based on evolving only φ(x) f
 
 The numerical equation is denote as:
 
-![eq5](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/eq5.png)
+![eq5](https://github.com/JaroslawWiosna/level-set/blob/devel/rm-images/eq5.png "source: http://www.ipol.im/pub/art/2012/g-cv/article.pdf")
 
 Where A and B are coefficients specified as:
 
-![eq6](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/eq6.png)
+![eq6](https://github.com/JaroslawWiosna/level-set/blob/devel/rm-images/eq6.png "source: http://www.ipol.im/pub/art/2012/g-cv/article.pdf")
 
 As said before parameters 𝜇, λ, ν, have huge impact on final effect - precision of segmentation. Too small or too big value can result in no segmentation at all.
 
-![pic2](https://github.com/JaroslawWiosna/level-set/blob/p_readme/rm-images/pic2.png)
+![pic2](https://github.com/JaroslawWiosna/level-set/blob/devel/rm-images/pic2.png "source: http://www.ipol.im/pub/art/2012/g-cv/article.pdf")
 
 Here are some examples, how curvature of φ(x) function, changes with iterations:
 
-![demo1](http://demo.ipol.im/demo/g_chan_vese_segmentation/tmp/2140C562AECD29658B8613F5410A768D/evolution.gif "Demo 1")![demo2](http://demo.ipol.im/demo/g_chan_vese_segmentation/tmp/6E0F903703A66B976AE828BC733499A3/evolution.gif "Demo 2")
+![demo1](http://demo.ipol.im/demo/g_chan_vese_segmentation/tmp/2140C562AECD29658B8613F5410A768D/evolution.gif "Demo 1, source: http://demo.ipol.im/demo/g_chan_vese_segmentation/")![demo2](http://demo.ipol.im/demo/g_chan_vese_segmentation/tmp/6E0F903703A66B976AE828BC733499A3/evolution.gif "Demo 2, source: http://demo.ipol.im/demo/g_chan_vese_segmentation/")
 
 And here is an effect of our work:
 
 ![image005](http://i.imgur.com/v35MRXs.gif)
-
 
 ---
 
