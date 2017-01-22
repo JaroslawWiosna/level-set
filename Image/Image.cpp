@@ -13,9 +13,15 @@
 #include <cstdio>
 #include <opencv2/opencv.hpp>
 
-Image::Image(const std::string& filename, int flags=1)
+/**
+ * Constructor
+ *
+ * @param [in] filename - path to the image
+ * @param [in] flag - default value is equal to cv::IMREAD_GRAYSCALE
+ */
+Image::Image(const std::string& filename, int flag)
 {
-	initImage(filename, flags);
+	initImage(filename, flag);
 	rows = inputImage.rows;
 	cols = inputImage.cols;
 
@@ -25,11 +31,61 @@ Image::Image(const std::string& filename, int flags=1)
 	//default values
 	mi = 0.2;
 	eta = 0.00000001;
-	ni = 0.00000001;
-	lambda1 = 0.300002;
-	lambda2 = 0.300002;
-	eps = 1000;
-	dt = 0.001; // timestep
+	ni = FLT_MIN;
+	lambda1 = 1;
+	lambda2 = 1;
+	eps = 1;
+	dt = 0.5; // timestep
+	steps = 2;
+}
+
+/**
+ * Constructor
+ *
+ * @param [in] TODO:
+ */
+Image::Image(std::map<std::string, std::string> flags)
+{
+	initImage(flags["-i"], cv::IMREAD_GRAYSCALE);
+	rows = inputImage.rows;
+	cols = inputImage.cols;
+
+	initFimage();
+	initPhi();
+
+	//default values
+	mi = 0.2;
+	eta = 0.00000001;
+	ni = FLT_MIN;
+	lambda1 = 1;
+	lambda2 = 1;
+	eps = 1;
+	dt = 0.5; // timestep
+	steps = 2;
+
+	if (!flags["-mi"].empty())
+		setMi(flags["-mi"]);
+ 	if (!flags["-eta"].empty())
+ 		setEta(flags["-eta"]);
+ 	if (!flags["-ni"].empty())
+ 		setNi(flags["-ni"]);
+ 	if (!flags["-lambda1"].empty())
+		setLambda1(flags["-lambda1"]);
+	if (!flags["-lambda2"].empty())
+ 		setLambda2(flags["-lambda2"]);
+	if (!flags["-lambda"].empty())
+	{
+		setLambda1(flags["-lambda"]);
+		setLambda2(flags["-lambda"]);
+	}
+	if (!flags["-eps"].empty())
+		setEps(flags["-eps"]);
+	if (!flags["-dt"].empty())
+		setDt(flags["-dt"]);
+ 
+	if (!flags["-steps"].empty())
+		setSteps(flags["-steps"]);
+ 
 }
 
 Image::~Image()
@@ -103,7 +159,7 @@ void Image::detectBorders()
 {
         
 	bool should_continue = true;
-	for (std::size_t step = 0; step < 20 && should_continue; ++step)
+	for (std::size_t step = 0; step < steps && should_continue; ++step)
    		{
 		//should_continue = false;
 		updateAverages();
@@ -292,6 +348,16 @@ void Image::setDt(float value)
 void Image::setDt(std::string value)
 {
 	dt = std::stof(value);
+}
+
+void Image::setSteps(float value)
+{
+	steps = value;
+}
+
+void Image::setSteps(std::string value)
+{
+	steps = std::stof(value);
 }
 
 void Image::savePhi()
