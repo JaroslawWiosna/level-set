@@ -234,6 +234,7 @@ void Image::destroyFimage()
 	for(int i = 0; i < rows; ++i)
 	{
 		delete [] fimage[i];
+		fimage[i] = nullptr;
 	}
 }
 void Image::destroyPhi()
@@ -241,6 +242,7 @@ void Image::destroyPhi()
 	for(int i = 0; i < rows; ++i)
 	{
 		delete [] phi[i];
+		phi[i] = nullptr;
 	}
 }
 
